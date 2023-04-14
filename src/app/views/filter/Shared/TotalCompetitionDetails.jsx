@@ -49,7 +49,7 @@ const TotalCompetitionDetails = () => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    // ---------------------By useLocation we get  prop from totalRecord
+    // ** -------------By useLocation we get  prop from totalRecord
     const { state } = useLocation();
     console.log('state', state)
     // ------------------------------------

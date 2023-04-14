@@ -3,8 +3,7 @@ import { styled, Button, Box } from '@mui/material';
 import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, SimpleCard } from 'app/components';
-// import AutocompleteCombo from './Shared/AutocompleteCombo';
-import PaginationTable from './Shared/PaginationTable';
+import CompetitionGroupTable from './Shared/CompetitionGroupTable';
 import SubjectAndDateRecord from '../filter/Shared/SubjectAndDateRecord'
 
 const CompetitionList = () => {
@@ -27,29 +26,23 @@ const CompetitionList = () => {
         <Box className="breadcrumb" display="flex" justifyContent="space-between">
           <Breadcrumb
             routeSegments={[
-              { name: 'Cpmpetition-Group', path: '/Cpmpetition-Group' },
+              { name: 'Competition-Group', path: '/Competition-Group' },
               { name: 'Table' },
             ]}
           />
           {/* // -------------FOR BACK BUTTON-------------------- */}
           <Button
-            // fullWidth
             color="primary"
             variant="outlined"
             onClick={() => navigate(-1)}
-          // sx={{ mt: 2, mb: 2, ml: 2 }}
           >
             Go Back
           </Button>
         </Box>
         <SubjectAndDateRecord />
-        {/* <SimpleCard >
-          <AutocompleteCombo />
-          <SubjectAndDateRecord />
-        </SimpleCard> */}
         <Box sx={{ mt: 1 }}>
           <SimpleCard title="COMPETITION - GROUP">
-            <PaginationTable />
+            <CompetitionGroupTable />
           </SimpleCard>
         </Box>
       </Container>

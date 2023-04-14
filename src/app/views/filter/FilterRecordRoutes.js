@@ -14,7 +14,6 @@ const TotalCompetitionDetails = Loadable(lazy(() => import('./Shared/TotalCompet
 const FilterRecordRoute = [
   { path: '/filter/FilterRecord', element: <FilterRecord />, auth: authRoles.admin },
   { path: '/filter/TotalRegistrationDetails', element: <TotalRegistrationDetails /> },
-  // { path: '/filter/TotalRecordDetails/:sId/:dateRecord', element: <TotalRecordDetails /> },
   { path: '/filter/TotalCompetitionDetails', element: <TotalCompetitionDetails /> },
 ];
 

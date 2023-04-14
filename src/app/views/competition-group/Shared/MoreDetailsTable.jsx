@@ -1,9 +1,7 @@
-import {useParams}  from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import {
   Box,
-  // Icon,
-  // IconButton,
   Button,
   styled,
   Table,
@@ -16,9 +14,6 @@ import {
 import { useState, useEffect } from 'react';
 import { Breadcrumb, SimpleCard } from 'app/components';
 import { useNavigate } from 'react-router-dom';
-// import DialogTransition from './DialogTra nsition';
-import FullScreenDialog from './FullScreenDialog';
-import { CardGiftcardOutlined } from '@mui/icons-material';
 
 const StyledTable = styled(Table)(() => ({
   whiteSpace: 'pre',
@@ -29,114 +24,6 @@ const StyledTable = styled(Table)(() => ({
     '& tr': { '& td': { paddingLeft: 0, textTransform: 'capitalize' } },
   },
 }));
-
-// const subscribarList = [
-//   {
-//     id: 1,
-//     group_id: 'john doe',
-//     total_competition: 'ABC Fintech LTD.',
-//     player1: '---',
-//     player2: '---',
-//     competition_date: '18 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//     slotEnd: '---',
-//     status: 'close',
-//     result: '---',
-//   },
-//   {
-//     id: 2,
-//     group_id: 'kessy bryan',
-//     total_competition: 'My Fintech LTD.',
-//     player1: '---',
-//     player2: '---',
-//     competition_date: '10 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//     slotEnd: '---',
-//     status: 'open',
-//   },
-//   {
-//     id: 3,
-//     total_competition: 'My Fintech LTD.',
-//     group_id: 'kessy bryan',
-//     player1: '---',
-//     player2: '---',
-//     competition_date: '10 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//     slotEnd: '---',
-//     status: 'open',
-//   },
-//   {
-//     id: 4,
-//     group_id: 'james cassegne',
-//     total_competition: 'Collboy Tech LTD.',
-//     player1: '---',
-//     player2: '---',
-//     competition_date: '8 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//     slotEnd: '---',
-//     status: 'close',
-//   },
-//   {
-//     id: 5,
-//     group_id: 'lucy brown',
-//     total_competition: 'ABC Fintech LTD.',
-//     player1: '---',
-//     player2: '---',
-//     competition_date: '1 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//     slotEnd: '---',
-//     status: 'open',
-//   },
-//   {
-//     id: 6,
-//     group_id: 'lucy brown',
-//     total_competition: 'ABC Fintech LTD.',
-//     player1: '---',
-//     player2: '---',
-//     competition_date: '1 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//     slotEnd: '---',
-//     status: 'open',
-//   },
-//   {
-//     id: 7,
-//     group_id: 'lucy brown',
-//     total_competition: 'ABC Fintech LTD.',
-//     competition_date: '1 january, 2019',
-//     amount: 89000,
-//     status: 'open',
-//   },
-//   {
-//     id: 8,
-//     group_id: 'lucy brown',
-//     total_competition: 'ABC Fintech LTD.',
-//     player1: '---',
-//     player2: '---',
-//     competition_date: '1 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//     slotEnd: '---',
-//     status: 'open',
-//   },
-//   {
-//     id: 9,
-//     group_id: 'lucy brown',
-//     total_competition: 'ABC Fintech LTD.',
-//     player1: '---',
-//     player2: '---',
-//     competition_date: '1 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//     slotEnd: '---',
-//     status: 'open',
-//   },
-// ];
 
 const MoreDetailsTable = () => {
   // ===============Get id 
@@ -173,6 +60,7 @@ const MoreDetailsTable = () => {
     },
   }));
 
+  // ** pagination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -198,16 +86,13 @@ const MoreDetailsTable = () => {
           <Box display="flex">
             {/* // -------------FOR BACK BUTTON-------------------- */}
             <Button
-              // fullWidth
               color="primary"
               variant="outlined"
               onClick={() => navigate(-1)}
               sx={{ mr: 2 }}
-              // sx={{ mt: 2, mb: 2, ml: 2 }}
             >
               Go Back
             </Button>
-            <FullScreenDialog />
           </Box>
         </Box>
 
@@ -227,13 +112,9 @@ const MoreDetailsTable = () => {
                   <TableCell align="center">SLOT START</TableCell>
                   <TableCell align="center">SLOT END </TableCell>
                   <TableCell align="center">WALK OVER</TableCell>
-                  {/* <TableCell align="center">RESULT</TableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/* {subscribarList
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((subscriber, index) => ( */}
                 {users
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((user, index) => {
@@ -250,15 +131,6 @@ const MoreDetailsTable = () => {
                         <TableCell align="center">{user.slot_start}</TableCell>
                         <TableCell align="center">{user.slot_end}</TableCell>
                         <TableCell align="center">{user.is_walk_over}</TableCell>
-                        {/* <TableCell align="center">
-                          <DialogTransition />
-                        </TableCell> */}
-
-                        {/* <TableCell align="right">
-                  <IconButton>
-                    <Icon color="error">close</Icon>
-                  </IconButton>
-                </TableCell> */}
                       </TableRow>
                     );
                   })}
@@ -267,9 +139,6 @@ const MoreDetailsTable = () => {
 
             <TablePagination
               text-44
-              // bg-green
-              // elevation-z8
-              // sx={{ px: 2 }}
               page={page}
               component="div"
               rowsPerPage={rowsPerPage}

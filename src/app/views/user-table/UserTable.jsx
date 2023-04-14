@@ -3,7 +3,7 @@ import { styled, Button, Box } from '@mui/material';
 import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, SimpleCard } from 'app/components';
-import PaginationTable from './Shared/PaginationTable';
+import UserTableList from './Shared/UserTableList';
 
 const UserTable = () => {
   // -------------FOR BACK BUTTON--------------------
@@ -36,9 +36,9 @@ const UserTable = () => {
               Go Back
             </Button>
           </Box>
-          
+
           <SimpleCard title="USER TABLE LIST">
-            <PaginationTable />
+            <UserTableList />
           </SimpleCard>
         </Container>
       </Fragment>

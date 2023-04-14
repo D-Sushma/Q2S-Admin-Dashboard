@@ -1,6 +1,3 @@
-// import ItemStore from '../../../utils/store';
-// import useStore from 'app/utils/store';
-
 import moment from 'moment';
 import {
   Box,
@@ -46,10 +43,7 @@ const TotalRegistrationDetails = () => {
   }, []);
   // ----------DB FETCH END------------------------------
 
-  // -------------FOR BACK BUTTON--------------------
-  const navigate = useNavigate();
-
-  // ...............FOR BREADCRUMB CONNTAINER COMPONENT.........................
+  // ...............FOR BREADCRUMB CONTAINER COMPONENT.........................
   const Container = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
@@ -59,7 +53,7 @@ const TotalRegistrationDetails = () => {
     },
   }));
 
-  //  ........................FOR PAGINATION......................................
+  // ** pagination 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -71,29 +65,13 @@ const TotalRegistrationDetails = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  // --------------------------prev-------------------------------
-  // useEffect(() => {
-  //  list()
-  // }, [])
 
-  // const list = ItemStore((state) => state.items)
-  // console.log('list', list)
-  // console.log('list.length', list.length)
-  // -----------------------------
-  // //to use state , if need to bind with DOM element
-  // const getItems = useStore((state) => state.items);
-  // const addItems = useStore(state => state.addItems);
-  // const subtractItems = useStore(state => state.subtractItems);
-  // const addItemsBy = useStore(state => state.addItemsBy);
-  // const subtractItemsBy = useStore(state => state.subtractItemsBy);
-  // const reset = useStore((state) => state.reset);
+  // -------------FOR BACK BUTTON--------------------
+  const navigate = useNavigate();
 
-  // ---------------------By useLocation we get  prop from totalRecord
+  // ** By useLocation, we get  prop from totalRecord
   const { state } = useLocation();
-  // const { subid, date } = state;
   console.log('state', state)
-  // console.log('subid', subid)
-  // console.log('date', date)
   // ------------------------------------
   return (
     <>
@@ -113,15 +91,6 @@ const TotalRegistrationDetails = () => {
         </Box>
       </Container>
 
-      {/* <h1>{getItems} people have cast their votes</h1>
-      <button onClick={addItems}> increase vote</button>
-      <button onClick={subtractItems}> delete vote</button>
-      <button onClick={() => addItemsBy(10)}> increase vote by 10 </button>
-      <button onClick={() => subtractItemsBy(10)}> delete vote by 10</button>
-      <button onClick={reset}> reset vote </button> */}
-      {/* --------------------------useLocation---------------------- */}
-      {/* {state.map((ele, i) => (<h1 key={i}>{ele.id}</h1>))} */}
-      {/* ----------------------------------------------------------- */}
       <Box sx={{ mt: 1 }}>
         <SimpleCard title="TOTAL MEMBER REGISTRATION">
 
@@ -142,30 +111,30 @@ const TotalRegistrationDetails = () => {
               <TableBody>
 
                 {/* {totalRegistration.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((joinuser, index) => { */}
+                  .map((user, index) => { */}
                 {state.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((joinuser, index) => {
+                  .map((user, index) => {
                     return (
 
                       <TableRow key={index}>
-                        <TableCell align="center">{joinuser.id}</TableCell>
-                        {/* <TableCell align="center">{joinuser.name + " " + joinuser.lname}</TableCell> */}
-                        <TableCell align="center">{joinuser.userid}</TableCell>
+                        <TableCell align="center">{user.id}</TableCell>
+                        {/* <TableCell align="center">{user.name + " " + user.lname}</TableCell> */}
+                        <TableCell align="center">{user.userid}</TableCell>
 
-                        {(joinuser.subject) === 6 ? <TableCell align="center">English</TableCell>
-                          : (joinuser.subject) === 13 ? <TableCell align="center">GK</TableCell>
+                        {(user.subject) === 6 ? <TableCell align="center">English</TableCell>
+                          : (user.subject) === 13 ? <TableCell align="center">GK</TableCell>
                             : <TableCell align="center">----</TableCell>}
 
-                        {(joinuser.subscription) === 1 ? <TableCell align="center">Weekly</TableCell>
-                          : <TableCell align="center">{joinuser.subscription}</TableCell>}
+                        {(user.subscription) === 1 ? <TableCell align="center">Weekly</TableCell>
+                          : <TableCell align="center">{user.subscription}</TableCell>}
 
-                        {(joinuser.status) === 1 ? <TableCell align="center">Active</TableCell>
-                          : (joinuser.status) === 0 ? <TableCell align="center">Deactive</TableCell>
+                        {(user.status) === 1 ? <TableCell align="center">Active</TableCell>
+                          : (user.status) === 0 ? <TableCell align="center">Inactive</TableCell>
                             : <TableCell align="center">----</TableCell>}
 
-                        <TableCell align="center">{moment(joinuser.updated_at).format('DD/MM/YYYY')}</TableCell>
-                        <TableCell align="center">{moment(joinuser.created_at).format('DD/MM/YYYY')}</TableCell>
-                        <TableCell align="center">{moment(joinuser.expiry_date).format('DD/MM/YYYY')}</TableCell>
+                        <TableCell align="center">{moment(user.updated_at).format('DD/MM/YYYY')}</TableCell>
+                        <TableCell align="center">{moment(user.created_at).format('DD/MM/YYYY')}</TableCell>
+                        <TableCell align="center">{moment(user.expiry_date).format('DD/MM/YYYY')}</TableCell>
                       </TableRow>)
                   })}
               </TableBody>

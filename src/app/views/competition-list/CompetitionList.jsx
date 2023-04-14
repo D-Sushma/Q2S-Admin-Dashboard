@@ -1,22 +1,7 @@
-// import React from 'react';
-// import AutocompleteCombo from './AutocompleteCombo';
-// import PaginationTable from './PaginationTable';
-// export default function CompetitionList() {
-//   return (
-//     <>
-//       <div>CompetitionList</div>
-//       <AutocompleteCombo />
-//       <PaginationTable />
-//     </>
-//   );
-// }
-//============================================================================================================
-// import Layout1 from "./components/MatxLayout/Layout1/Layout1";
 import { Button, Box, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, SimpleCard } from 'app/components';
-// import AutocompleteCombo from './Shared/AutocompleteCombo';
-import PaginationTable from './Shared/PaginationTable';
+import CompetitionListTable from './Shared/CompetitionListTable';
 import SubjectAndDateRecord from '../filter/Shared/SubjectAndDateRecord';
 
 const CompetitionList = () => {
@@ -43,30 +28,21 @@ const CompetitionList = () => {
           />
           {/* // -------------FOR BACK BUTTON-------------------- */}
           <Button
-            // fullWidth
             color="primary"
             variant="outlined"
             onClick={() => navigate(-1)}
-          // sx={{ mt: 2, mb: 2, ml: 2 }}
           >
             Go Back
           </Button>
         </Box>
         <SubjectAndDateRecord />
-        {/* <SimpleCard > */}
-        {/* <AutocompleteCombo /> */}
-        {/* <SubjectAndDateRecord /> */}
-        {/* </SimpleCard> */}
-        <Box sx={{mt:1}}>
+        <Box sx={{ mt: 1 }}>
           <SimpleCard title="COMPETITION - LIST">
-            <PaginationTable />
+            <CompetitionListTable />
           </SimpleCard>
         </Box>
       </Container>
-
-      {/* <Layout1/> */}
     </>
   );
 };
-
 export default CompetitionList;

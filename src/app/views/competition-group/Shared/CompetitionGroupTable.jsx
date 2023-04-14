@@ -2,8 +2,6 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import {
   Box,
-  // Icon,
-  // IconButton,
   styled,
   Table,
   TableBody,
@@ -15,7 +13,6 @@ import {
 import { useState, useEffect } from 'react';
 // FOR BACK BUTTON...........................................
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 
 const StyledTable = styled(Table)(() => ({
   whiteSpace: 'pre',
@@ -26,83 +23,6 @@ const StyledTable = styled(Table)(() => ({
     '& tr': { '& td': { paddingLeft: 0, textTransform: 'capitalize' } },
   },
 }));
-
-// const subscribarList = [
-//   {
-//     id: 1,
-//     group_id: 'john doe',
-//     total_competition: 'ABC Fintech LTD.',
-//     competition_date: '18 january, 2019',
-//     winner: 'Yes',
-//     more_detail: 'More-Details',
-//   },
-
-//   {
-//     id: 2,
-//     group_id: 'kessy bryan',
-//     total_competition: 'My Fintech LTD.',
-//     competition_date: '10 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//   },
-//   {
-//     id: 3,
-//     total_competition: 'My Fintech LTD.',
-//     group_id: 'kessy bryan',
-//     competition_date: '10 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//   },
-//   {
-//     id: 4,
-//     group_id: 'james cassegne',
-//     total_competition: 'Collboy Tech LTD.',
-//     competition_date: '8 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//   },
-//   {
-//     id: 5,
-//     group_id: 'lucy brown',
-//     total_competition: 'ABC Fintech LTD.',
-//     competition_date: '1 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//   },
-//   {
-//     id: 6,
-//     group_id: 'lucy brown',
-//     total_competition: 'ABC Fintech LTD.',
-//     competition_date: '1 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//   },
-//   {
-//     id: 7,
-//     group_id: 'lucy brown',
-//     total_competition: 'ABC Fintech LTD.',
-//     competition_date: '1 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//   },
-//   {
-//     id: 8,
-//     group_id: 'lucy brown',
-//     total_competition: 'ABC Fintech LTD.',
-//     competition_date: '1 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//   },
-//   {
-//     id: 9,
-//     group_id: 'lucy brown',
-//     total_competition: 'ABC Fintech LTD.',
-//     competition_date: '1 january, 2019',
-//     winner: 'Yes',
-//     more_detail: '---',
-//   },
-// ];
-
 
 const PaginationTable = () => {
 
@@ -125,9 +45,8 @@ const PaginationTable = () => {
     fetchData();
   }, []);
   // ----------DB FETCH END------------------------------
-  // -------------FOR BACK BUTTON--------------------
-  // const navigate = useNavigate();
 
+  // ** pagination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -142,9 +61,6 @@ const PaginationTable = () => {
 
   return (
     <Box width="100%" overflow="auto">
-      {/* marginLeft="10px" border="1px dashed black" */}
-      {/* lightgreen #ccff90  #d0ebf4*/}
-
       <StyledTable sx={{ tableLayout: 'auto' }} bgcolor="#fafafa">
         <TableHead bgcolor="#e0f7fa">
           <TableRow>
@@ -157,13 +73,8 @@ const PaginationTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {subscribarList
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((subscriber, index) => ( */}
           {users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((user, index) => {
-              // let cgid = user.competition_group_id;
-              // console.log("cgid",cgid);
               return (
                 <TableRow key={index}>
                   <TableCell align="center">{user.id}</TableCell>
@@ -178,7 +89,6 @@ const PaginationTable = () => {
                       pathname: `/competition-group/MoreDetailsTable/${user.competition_group_id}`,
                     }}>
                       <Button
-                        // onClick={() => navigate('/competition-group/MoreDetailsTable/${user.competition_group_id}', cgid = (cgid) )}
                         // onClick={() => navigate(`/competition-group/MoreDetailsTable/${user.competition_group_id}`)}
                         // onClick={() => navigate(`/competition-group/MoreDetailsTable`)}
                         color="primary"
@@ -197,10 +107,7 @@ const PaginationTable = () => {
       </StyledTable>
 
       <TablePagination
-        // bg-green
-        // elevation-z8
         text-44
-        // sx={{ px: 2 }}
         page={page}
         component="div"
         rowsPerPage={rowsPerPage}

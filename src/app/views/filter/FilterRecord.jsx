@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import SubjectAndDateRecord from './Shared/SubjectAndDateRecord';
 import TotalRecord from './Shared/TotalRecord';
 
-// for data pssing into sibling......
+// ** make prop --> for data passing into sibling......
 export default function FilterRecord() {
   // const [regRecord, setRegRecord] = useState([]);
   const [regRecord, setRegRecord] = useState('');

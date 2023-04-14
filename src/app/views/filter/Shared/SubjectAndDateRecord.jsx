@@ -1,17 +1,12 @@
 import React from 'react';
 import moment from 'moment';
 import { SimpleCard } from 'app/components';
-// FOR SUBJECT RECORD.............................................
-import { List, ListItem, ListItemText, Menu, MenuItem, Select, InputLabel, Input, FormControl } from '@mui/material';
-import { styled } from '@mui/system';
+import { MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import { useEffect, useState } from 'react';
-// validation---------------BUTTON
 import { Button, Icon, Box } from '@mui/material';
 import { Span } from 'app/components/Typography';
-import { useNavigate } from 'react-router-dom';
 import ItemStore from '../../../utils/store';
 
-// ------------------------------------
 const options = [
   {
     label: 'GK - 13',
@@ -23,18 +18,10 @@ const options = [
   },
 ];
 
-
-// style for mMenuRoot tag................................................
-const MenuRoot = styled('div')(({ theme }) => ({
-  width: '100%',
-  maxWidth: 360,
-  backgroundColor: theme.palette.background.paper,
-}));
 export default function SubjectAndDateRecord({ setRegRecord }) {
   //step B----->
   const addExpiryDate = ItemStore((state) => state.addExpiryDate)
   // ----------DB FETCH-----------------------------
-  // const [dropdownData, setdropdownData]= useState([]);
   // const [expiryDate, setExpiryDate] = useState([]);
   const fetchData1 = async () => {
     await fetch('http://localhost:4000/member-registration')
@@ -46,19 +33,8 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
         //step C----->
         await addExpiryDate({ 'expiry_date': data.response.dates });
         // setExpiryDate(data.response.dates);
-        // ====================<- OR ->=============================
-        // const e_result = data.response.dates;
-        // let expiry = [];
-        // e_result.forEach((ele) => {
-        //   expiry.push(ele.expiryDate);
-        //   // console.log('expiry', expiry);
-        // })
-        // setdropdownData(expiry);
-        // // dropdownData.push(expiry);
-        // // console.log('dropdownData', dropdownData);
       });
   };
-  // console.log('dropdownData', dropdownData);
   // console.log('expiryDate', expiryDate);
   useEffect(() => {
     fetchData1();
@@ -69,7 +45,6 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
   console.log('expiryDate========>>>', expiryDate);
   // .......................................................
   const [submitData, setSubmitData] = useState([]);
-  const [regData, setRegData] = useState('')
   const fetchSubmitData = async () => {
     // STEP-> 6.......
     await myItems();
@@ -96,13 +71,9 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
           console.log('Get SUBMIT data', data);
           // setSubmitData(data.results);
           setRegRecord(data);
-          console.log('data', data)
-          setRegData(data)
           // step5-->> set dynamic total record ... go totalRecord
           await setTotalReg(data.totalReg);
           await setTotalComp(data.totalComp);
-          // await myItem2_r(data.totalReg)
-          // await myItem2_c(data.totalComp)
         });
     } catch (error) {
       console.log('error', error)
@@ -113,6 +84,7 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
     // fetchSubmitData();
   }, []);
 
+  // ** from store 2.--------------------
   // step2-->> store data that we want--------for Total Record
   const addTotalRegistration = ItemStore((state) => state.addTotalRegistration);
   const addTotalCompetition = ItemStore((state) => state.addTotalCompetition);
@@ -129,73 +101,6 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
     console.log('total_comp=====>>>', data)
   }
 
-
-  // --------------------for totalRecord. .......
-  // const addItem1 = ItemStore((state) => state.addItem1)
-
-  // const myItem2_r = async (data) => {
-  //   addItem1({ 'reg_length': data })
-  //   console.log('addItem1', { 'reg_length': data })
-
-  //   await getData2_r();
-  // }
-
-  // const addItem2 = ItemStore((state) => state.addItem2)
-
-  // const myItem2_c = async (data) => {
-  //   addItem2({ 'comp_length': data })
-  //   console.log('addItem2', { 'comp_length': data })
-
-  //   await getData2_c();
-  // }
-
-  // const state1 = ItemStore()
-  // console.log('state1', state1.length_r)
-  // console.log('state1_c', state1.length_c)
-  // const getData2_r = () => {
-  //   var lData_r = state1.length_r;
-  //   console.log('lData_r---->', lData_r)
-  // }
-
-  // const getData2_c = () => {
-  //   var lData_c = state1.length_c;
-  //   console.log('lData_c---->', lData_c)
-  // }
-
-  // FOR SUBJECT RECORD...................................................
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-
-  function handleClickListItem(event) {
-    setAnchorEl(event.currentTarget);
-  }
-  function handleMenuItemClick(event, index) {
-    setSelectedIndex(index);
-    setAnchorEl(null);
-  }
-  function handleClose() {
-    setAnchorEl(null);
-  }
-
-  // FOR WEEKLY RECORD BASIS OF EXPIRY DATE...................................................
-  const [anchorEl1, setAnchorEl1] = React.useState(null);
-  const [selectedIndex1, setSelectedIndex1] = React.useState(0);
-
-  function handleClickListItem1(event) {
-    setAnchorEl1(event.currentTarget);
-  }
-  function handleMenuItemClick1(event, index) {
-    setSelectedIndex1(index);
-    setAnchorEl1(null);
-  }
-  function handleClose1() {
-    setAnchorEl1(null);
-  }
-
-  // -------------FOR BACK BUTTON--------------------
-  const navigate = useNavigate();
-
-  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // ===============FOR SELECT OPTION IN WEEKLY RECORD======
   let [week_date, setWeek_date] = useState('');
   let [weeklyDate, setWeeklyDate] = useState('');
@@ -216,29 +121,6 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
 
   };
 
-  // =====get details CLICK ON SUBMIT BUTTON (subject && weekly record)==========
-  // let getDetails = () => {
-  //   // setRegRecord({count : 0});
-  //   setRegRecord('');
-  //   console.log("###reached get details--->", expiryDate);
-  //   console.log(subjectId, weeklyDate);
-  //   expiryDate.forEach((data) => {
-  //     // console.log(data.details.subjectId, data.details.date);
-  //     if (data.details.subjectId === subjectId && data.details.date === weeklyDate) {
-  //       setRegRecord(data.details);
-  //       console.log('data.details', data)
-  //     }
-  //   })
-  // }
-
-  let getValues = () => {
-    console.log(subjectId, weeklyDate);
-
-    // submitData.forEach((data) => {
-    //   console.log('data', data)
-    //   setRegRecord(data);
-    // })
-  }
   // ** from store 1.---------------------------------------------
   // STEP-> 2... store addItem in addItem variable-------------
   const addItem = ItemStore((state) => state.addItem);
@@ -273,88 +155,6 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
   return (
     <>
       <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="0px">
-
-        {/* // FOR SUBJECT RECORD................................................... */}
-        {/* <SimpleCard title="GK/ENGLISH">
-          <MenuRoot sx={{ width: 300, height: 20 }}>
-            <List component="nav" aria-label="Device settings">
-              <ListItem
-                button
-                aria-haspopup="true"
-                aria-controls="lock-menu"
-                aria-label="When device is locked"
-                onClick={handleClickListItem}
-                sx={{ width: 250, marginTop: [-3], padding: 0 }}
-              >
-                <ListItemText
-                  primary="Record Basis of Subject"
-                  secondary={options[selectedIndex]}
-                />
-              </ListItem>
-            </List>
-
-            <Menu
-              id="lock-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              {options.map((option, index) => (
-                <MenuItem
-                  key={option}
-                  key={option.value}
-                  disabled={index === 0}
-                  selected={index === selectedIndex}
-                  onClick={(event) => handleMenuItemClick(event, index)}
-                >
-                  {option}
-                  {option.label}
-                </MenuItem>
-              ))}
-            </Menu>
-          </MenuRoot>
-        </SimpleCard> */}
-
-        {/* <SimpleCard title="Weekly">
-          <MenuRoot sx={{ width: 300, height: 20 }}>
-            <List component="nav" aria-label="Device settings">
-              <ListItem
-                button
-                aria-haspopup="true"
-                aria-controls="lock-menu1"
-                aria-label="When device is locked"
-                onClick={handleClickListItem1}
-                sx={{ width: 250, marginTop: [-3], padding: 0 }}
-              >
-                <ListItemText
-                  primary="Weekly Record Basis of Expiry Date"
-                  secondary={dropdownData[selectedIndex1]}
-                />
-              </ListItem>
-            </List>
-            <Menu
-              sx={{ height: 400 }}
-              id="lock-menu1"
-              anchorEl={anchorEl1}
-              keepMounted
-              open={Boolean(anchorEl1)}
-              onClose={handleClose1}
-            >
-              {dropdownData.map((option, index) => (
-                <MenuItem
-                  key={option}
-                  selected={index === 0}
-                  onClick={(event) => handleMenuItemClick1(event, index)}
-                >
-                  {option}
-                </MenuItem>
-              ))}
-            </Menu>
-          </MenuRoot>
-        </SimpleCard> */}
-
-        {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
         {/* // FOR SUBJECT RECORD................................................... */}
         <SimpleCard title="GK/ENGLISH" >
           <Box sx={{ width: 300, height: 50, backgroundColor: "white" }}>
@@ -390,9 +190,6 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
                         {eDate.startDate} TO {eDate.expiryDate}
                       </MenuItem>
                     ))}
-                    {/* {dropdownData.map((eDate, i) => (
-                      <MenuItem key={eDate}>{eDate}</MenuItem>
-                    ))} */}
                   </Select>
                 </FormControl>
               </Box>
@@ -407,8 +204,6 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
           type="submit"
           sx={{ width: 100, height: 40 }}
           disabled={!subjectId || !weeklyDate}
-          // onClick={() => getDetails()}
-          // onClick={() => getValues()}
           onClick={() => fetchSubmitData()}
         >
           <Icon>send</Icon>
