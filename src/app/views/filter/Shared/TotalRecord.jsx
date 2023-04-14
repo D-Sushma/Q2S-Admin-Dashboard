@@ -47,8 +47,8 @@ export default function FullScreenDialog({ regRecord }) {
   // step6-->> get data from store that were set from SubjectAndDateRecord ......
   const { total_reg, total_comp } = ItemStore();
 
-  console.log('total_reg.length', total_reg.length)
-  console.log('total_comp.length', total_comp.length)
+  console.log('total_reg.length', total_reg)
+  console.log('total_comp.length', total_comp)
 
 
   return (
