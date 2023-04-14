@@ -44,11 +44,11 @@ export default function FullScreenDialog({ regRecord }) {
   // addItem1({ 'reg_length': regRecord.totalReg, 'comp_length': regRecord.totalComp })
   // console.log('addItems1', { 'reg_length': regRecord.totalReg, 'comp_length': regRecord.totalComp })
 
-  // step3-->> get data ----------for Total Record......
-  const { value_r, value_c } = ItemStore();
+  // step6-->> get data from store that were set from SubjectAndDateRecord ......
+  const { total_reg, total_comp } = ItemStore();
 
-  console.log('value_r.length', value_r.length)
-  console.log('value_c.length', value_c.length)
+  console.log('total_reg.length', total_reg.length)
+  console.log('total_comp.length', total_comp.length)
 
 
   return (
@@ -66,11 +66,11 @@ export default function FullScreenDialog({ regRecord }) {
             // onClick={() => navigate('/filter/TotalRecordDetails')} 
             // -->>> SOLVE ERROR =-> AFTER GO bACK BUTTON AGAIN CLICK ON THIS BUTTON THAN SHOW EMPTY PAGE 
             // onClick={() => navigate('/filter/TotalRegistrationDetails', { state: regRecord.totalReg })}
-            onClick={() => navigate('/filter/TotalRegistrationDetails', { state: value_r })}
+            onClick={() => navigate('/filter/TotalRegistrationDetails', { state: total_reg })}
           // onClick={(i) => myItems(i)}
           // onClick={() => navigate(`/filter/TotalRecordDetails/${regRecord.subjectId}/${regRecord.dates}`)}
           >
-            {value_r ? value_r.length : "-"}
+            {total_reg ? total_reg.length : "-"}
             {/* {regRecord ? regRecord.totalReg.length : "-"} */}
           </Button>
         </Box>
@@ -89,9 +89,9 @@ export default function FullScreenDialog({ regRecord }) {
           <br />
           <Button variant="outlined" color="primary" sx={{ width: 150 }}
             // onClick={() => navigate('/filter/TotalCompetitionDetails', { state: regRecord.totalComp })}
-            onClick={() => navigate('/filter/TotalCompetitionDetails', { state: value_c })}
+            onClick={() => navigate('/filter/TotalCompetitionDetails', { state: total_comp })}
           >
-            {value_c ? value_c.length : "-"}
+            {total_comp ? total_comp.length : "-"}
             {/* {regRecord ? regRecord.totalComp.length : "-"} */}
           </Button>
 

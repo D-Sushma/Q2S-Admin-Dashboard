@@ -71,7 +71,7 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
   const [submitData, setSubmitData] = useState([]);
   const [regData, setRegData] = useState('')
   const fetchSubmitData = async () => {
-    // STEP-> 4.......
+    // STEP-> 6.......
     await myItems();
     try {
       var myHeaders = new Headers();
@@ -98,8 +98,9 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
           setRegRecord(data);
           console.log('data', data)
           setRegData(data)
-          await add1(data.totalReg);
-          await add2(data.totalComp);
+          // step5-->> set dynamic total record ... go totalRecord
+          await setTotalReg(data.totalReg);
+          await setTotalComp(data.totalComp);
           // await myItem2_r(data.totalReg)
           // await myItem2_c(data.totalComp)
         });
@@ -112,18 +113,20 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
     // fetchSubmitData();
   }, []);
 
-  // step2-->> store data that we want--------for Total Record......go totalRecord
-  const increaseValueR = ItemStore((state) => state.increaseValueR);
-  const increaseValueC = ItemStore((state) => state.increaseValueC);
-
-  const add1 = async (data) => {
-    await increaseValueR({ 'value_r': data })
-    console.log('value_r======>>>', data)
+  // step2-->> store data that we want--------for Total Record
+  const addTotalRegistration = ItemStore((state) => state.addTotalRegistration);
+  const addTotalCompetition = ItemStore((state) => state.addTotalCompetition);
+  // step3-->>
+  const setTotalReg = async (data) => {
+    // step4-->>
+    await addTotalRegistration({ 'total_reg': data })
+    console.log('total_reg======>>>', data)
   }
 
-  const add2 = async (data) => {
-    await increaseValueC({ 'value_c': data })
-    console.log('value_c=====>>>', data)
+  const setTotalComp = async (data) => {
+    // step4-->>
+    await addTotalCompetition({ 'total_comp': data })
+    console.log('total_comp=====>>>', data)
   }
 
 
@@ -236,35 +239,35 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
     //   setRegRecord(data);
     // })
   }
-  // ---------------------------------------------------------------------
-  // STEP-> 2... store addItem-------------
+  // ** from store 1.---------------------------------------------
+  // STEP-> 2... store addItem in addItem variable-------------
   const addItem = ItemStore((state) => state.addItem);
-  // STEP-> 3... set current updated value--------
+  // STEP-> 4... 
   const myItems = () => {
-    // STEP-> 5....
+    // STEP-> 5... set current updated value from select box--------
     addItem({ 'sub_id': subjectId, 'ex_date': weeklyDate })
-    console.log('additems', { 'sub_id': subjectId, 'ex_date': weeklyDate })
+    console.log('addItems', { 'sub_id': subjectId, 'ex_date': weeklyDate })
   }
-  // STEP-> 7... ----- set in state....
+  // STEP-> 7... set in state 
   const state = ItemStore()
   console.log('state', state.items[0])
 
   // STEP-> 8... -----get value-----
-  const getdata = () => {
+  const getData = () => {
     const data = state.items;
-    var subid;
-    var exdate;
-    data?.forEach(o => {
-      console.log('o', o.sub_id)
-      subid = o.sub_id;
-      exdate = o.ex_date;
+    var subId;
+    var exDate;
+    data?.forEach(obj => {
+      console.log('obj', obj.sub_id, obj.ex_date);
+      subId = obj.sub_id;
+      exDate = obj.ex_date;
     });
-    setSubjectId(subid);
-    setWeeklyDate(exdate);
+    setSubjectId(subId);
+    setWeeklyDate(exDate);
   }
   useEffect(() => {
     // fetchData1();
-    getdata();
+    getData();
   }, [])
 
   return (
@@ -359,7 +362,7 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
               <Box>
                 <FormControl sx={{ width: 300, marginTop: 0, marginLeft: 0 }}>
                   <InputLabel sx={{ background: "white", px: 0.5 }}>Select Subject Code...</InputLabel>
-                  {/* STEP-> 6.... */}
+                  {/* STEP-> 3.... value = subjectId goes into store */}
                   <Select value={subjectId} onChange={(e) => selectionOptionChangeHandler(e)} >
                     {options.map((option, index) => (
                       <MenuItem value={option.value} key={index}>
@@ -379,7 +382,7 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
               <Box>
                 <FormControl sx={{ width: 300, marginTop: 0, marginLeft: 0 }}>
                   <InputLabel sx={{ background: "white", px: 0.5 }}>Select Weekly Date...</InputLabel>
-                  {/* STEP->6.... */}
+                  {/* STEP-> 3.... value = weeklyDate goes into store */}
                   <Select value={weeklyDate} onChange={(e) => selectionChangeHandler(e)} >
                     {/* //step E -----> */}
                     {expiryDate[0]?.expiry_date?.map((eDate, i) => (
