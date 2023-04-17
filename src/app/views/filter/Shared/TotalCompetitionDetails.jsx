@@ -100,8 +100,8 @@ const TotalCompetitionDetails = () => {
                                         return (
                                             <TableRow key={index}>
                                                 <TableCell align="center">{user.id}</TableCell>
-                                                <TableCell align="center">{user.p1_name}</TableCell>
-                                                <TableCell align="center">{user.p2_name}</TableCell>
+                                                <TableCell align="center">{user.p1}</TableCell>
+                                                <TableCell align="center">{user.p2}</TableCell>
                                                 <TableCell align="center">{user.p1_correct_count}</TableCell>
                                                 <TableCell align="center">{user.p2_correct_count}</TableCell>
                                                 <TableCell align="center">{user.p1_time_taken}</TableCell>

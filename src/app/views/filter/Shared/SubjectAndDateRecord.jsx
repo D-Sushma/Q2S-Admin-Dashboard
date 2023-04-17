@@ -44,7 +44,7 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
   const { expiryDate } = ItemStore();
   console.log('expiryDate========>>>', expiryDate);
   // .......................................................
-  const [submitData, setSubmitData] = useState([]);
+  // const [submitData, setSubmitData] = useState([]);
   const fetchSubmitData = async () => {
     // STEP-> 6.......
     await myItems();
@@ -152,11 +152,24 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
     getData();
   }, [])
 
+  // const f2 = () => {
+  //   if (subjectId || weeklyDate === 0) {
+  //     alert("something went wrong")
+  //   }
+  // }
+
+  console.log('weekly_date', weeklyDate);
+  console.log('subject_id', subjectId);
+
+
   return (
     <>
       <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="0px">
+        {console.log("options----------------------------------", options)}
+        {console.log("options----------------------------------", expiryDate[0]?.expiry_date)}
+
         {/* // FOR SUBJECT RECORD................................................... */}
-        <SimpleCard title="GK/ENGLISH" >
+        < SimpleCard SimpleCard title="GK/ENGLISH" >
           <Box sx={{ width: 300, height: 50, backgroundColor: "white" }}>
             <Box display="flex" border="1px solid white" justifyContent="space-evenly">
               <Box>
@@ -175,6 +188,7 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
             </Box>
           </Box>
         </SimpleCard>
+
         {/* // FOR WEEKLY RECORD..................................................... */}
         <SimpleCard title="WEEKLY">
           <Box sx={{ width: 300, height: 50, backgroundColor: "white" }}>
@@ -205,6 +219,8 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
           sx={{ width: 100, height: 40 }}
           disabled={!subjectId || !weeklyDate}
           onClick={() => fetchSubmitData()}
+        // onClick={() => { fetchSubmitData(); f2() }}
+
         >
           <Icon>send</Icon>
           <Span sx={{ pl: 1, textTransform: 'capitalize' }}>Submit</Span>
