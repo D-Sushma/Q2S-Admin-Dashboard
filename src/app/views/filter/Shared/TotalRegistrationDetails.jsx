@@ -10,7 +10,8 @@ import {
   TablePagination,
   TableRow,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+// import { useEffect } from 'react';
 import { Breadcrumb, SimpleCard } from 'app/components';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -27,20 +28,20 @@ const StyledTable = styled(Table)(() => ({
 
 const TotalRegistrationDetails = () => {
   // ----------DB FETCH END-------------------------
-  let [totalRegistration, setTotalRegistration] = useState([]);
-  let fetchRegRecord = () => {
-    fetch('http://localhost:4000/registration')
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Total record inside data Total  Record Details', data);
-        setTotalRegistration(data.response);
-      });
-  };
-  useEffect(() => {
-    fetchRegRecord();
-  }, []);
+  // let [totalRegistration, setTotalRegistration] = useState([]);
+  // let fetchRegRecord = () => {
+  //   fetch('http://localhost:4000/registration')
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log('Total record inside data Total  Record Details', data);
+  //       setTotalRegistration(data.response);
+  //     });
+  // };
+  // useEffect(() => {
+  //   fetchRegRecord();
+  // }, []);
   // ----------DB FETCH END------------------------------
 
   // ...............FOR BREADCRUMB CONTAINER COMPONENT.........................
@@ -119,7 +120,7 @@ const TotalRegistrationDetails = () => {
                       <TableRow key={index}>
                         <TableCell align="center">{user.id}</TableCell>
                         {/* <TableCell align="center">{user.name + " " + user.lname}</TableCell> */}
-                        <TableCell align="center">{user.userid}</TableCell>
+                        <TableCell align="center">{user.userid_name}</TableCell>
 
                         {(user.subject) === 6 ? <TableCell align="center">English</TableCell>
                           : (user.subject) === 13 ? <TableCell align="center">GK</TableCell>

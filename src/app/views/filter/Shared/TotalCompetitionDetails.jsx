@@ -100,13 +100,19 @@ const TotalCompetitionDetails = () => {
                                         return (
                                             <TableRow key={index}>
                                                 <TableCell align="center">{user.id}</TableCell>
-                                                <TableCell align="center">{user.p1}</TableCell>
-                                                <TableCell align="center">{user.p2}</TableCell>
+                                                <TableCell align="center">{user.p1_name}</TableCell>
+                                                <TableCell align="center">{user.p2_name}</TableCell>
                                                 <TableCell align="center">{user.p1_correct_count}</TableCell>
                                                 <TableCell align="center">{user.p2_correct_count}</TableCell>
                                                 <TableCell align="center">{user.p1_time_taken}</TableCell>
                                                 <TableCell align="center">{user.p2_time_taken}</TableCell>
-                                                <TableCell align="center">{user.winner_id}</TableCell>
+                                                {/* <TableCell align="center">{user.winner_id}</TableCell> */}
+                                                {(user.winner_id === user.p1)
+                                                    ? <TableCell align="center">{user.p1_name}</TableCell>
+                                                    : (user.winner_id === user.p2)
+                                                        ? <TableCell align="center">{user.p2_name}</TableCell>
+                                                        : <TableCell align="center">0</TableCell>
+                                                }
                                                 <TableCell align="center">{user.slot_start}</TableCell>
                                                 <TableCell align="center">{user.slot_end}</TableCell>
                                                 <TableCell align="center">{user.is_walk_over}</TableCell>

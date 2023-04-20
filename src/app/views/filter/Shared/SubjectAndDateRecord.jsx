@@ -1,7 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import { SimpleCard } from 'app/components';
-import { MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+// **  1..for loader - CircularProgress--> not use in submit fun
+import { MenuItem, Select, InputLabel, FormControl, CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Button, Icon, Box } from '@mui/material';
 import { Span } from 'app/components/Typography';
@@ -21,9 +22,13 @@ const options = [
 export default function SubjectAndDateRecord({ setRegRecord }) {
   //step B----->
   const addExpiryDate = ItemStore((state) => state.addExpiryDate)
+  // **  3..for loader - CircularProgress
+  const [loading, setLoading] = useState(true)
   // ----------DB FETCH-----------------------------
   // const [expiryDate, setExpiryDate] = useState([]);
   const fetchData1 = async () => {
+    // **  4..for loader - CircularProgress
+    setLoading(true)
     await fetch('http://localhost:4000/member-registration')
       .then((response) => {
         return response.json();
@@ -32,8 +37,12 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
         console.log('inside data subject date record', data.response);
         //step C----->
         await addExpiryDate({ 'expiry_date': data.response.dates });
+        // **  4..for loader - CircularProgress
+        setLoading(false)
         // setExpiryDate(data.response.dates);
       });
+    // **  4..for loader - CircularProgress
+    setLoading(false)
   };
   // console.log('expiryDate', expiryDate);
   useEffect(() => {
@@ -136,6 +145,8 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
 
   // STEP-> 8... -----get value-----
   const getData = () => {
+    // **  5..for loader - CircularProgress
+    setLoading(true)
     const data = state.items;
     var subId;
     var exDate;
@@ -146,6 +157,8 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
     });
     setSubjectId(subId);
     setWeeklyDate(exDate);
+    // **  5..for loader - CircularProgress
+    setLoading(false)
   }
   useEffect(() => {
     // fetchData1();
@@ -161,8 +174,10 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
   console.log('weekly_date', weeklyDate);
   console.log('subject_id', subjectId);
 
-
-  return (
+  // **  2..for loader - CircularProgress than set it in multiple fun
+  return loading ? (
+    <CircularProgress />
+  ) : (
     <>
       <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="0px">
         {console.log("options----------------------------------", options)}
