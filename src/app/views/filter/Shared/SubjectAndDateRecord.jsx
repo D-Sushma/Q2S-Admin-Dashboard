@@ -81,8 +81,13 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
           // setSubmitData(data.results);
           setRegRecord(data);
           // step5-->> set dynamic total record ... go totalRecord
+          // if (data.totalReg.length > 0) {
           await setTotalReg(data.totalReg);
+          // }
+          // if (data.totalComp.length > 0) {
           await setTotalComp(data.totalComp);
+          // }
+
         });
     } catch (error) {
       console.log('error', error)

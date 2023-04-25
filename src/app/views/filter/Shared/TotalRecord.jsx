@@ -28,7 +28,11 @@ export default function FullScreenDialog({ regRecord }) {
             sx={{ width: 150 }}
             // -->>> SOLVE ERROR =-> AFTER GO bACK BUTTON AGAIN CLICK ON THIS BUTTON THAN SHOW EMPTY PAGE 
             // onClick={() => navigate('/filter/TotalRegistrationDetails', { state: regRecord.totalReg })}
-            onClick={() => navigate('/filter/TotalRegistrationDetails', { state: total_reg })}
+
+            // ***before --> if submit again in same date & id it will give 0 data
+            // onClick={() => navigate('/filter/TotalRegistrationDetails', { state: total_reg })}
+            // **after solve error ~
+            onClick={() => { (total_reg.length > 0) ? navigate('/filter/TotalRegistrationDetails', { state: total_reg }) : alert("change pattern!") }}
           >
             {total_reg ? total_reg.length : "-"}
             {/* {regRecord ? regRecord.totalReg.length : "-"} */}
@@ -41,7 +45,10 @@ export default function FullScreenDialog({ regRecord }) {
           <br />
           <Button variant="outlined" color="primary" sx={{ width: 150 }}
             // onClick={() => navigate('/filter/TotalCompetitionDetails', { state: regRecord.totalComp })}
-            onClick={() => navigate('/filter/TotalCompetitionDetails', { state: total_comp })}
+            // ***before --> if submit again in same date & id it will give 0 data
+            // onClick={() => navigate('/filter/TotalCompetitionDetails', { state: total_comp })}
+            // **after solve error ~
+            onClick={() => { total_comp.length > 0 ? navigate('/filter/TotalCompetitionDetails', { state: total_comp }) : alert('no data found check your details') }}
           >
             {total_comp ? total_comp.length : "-"}
             {/* {regRecord ? regRecord.totalComp.length : "-"} */}
