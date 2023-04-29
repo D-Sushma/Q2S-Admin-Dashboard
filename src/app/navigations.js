@@ -1,8 +1,9 @@
 export const navigations = [
   { name: 'Dashboard', path: '/dashboard/default', icon: 'dashboard' },
-  { name: 'Registration', path: '/registration/MemberRegistration', icon: 'streetview' },
-  { name: 'Competition-List', path: '/competition-list/CompetitionList', icon: 'format_list_numbered' },
+  { name: 'All Registration', path: '/registration/MemberRegistration', icon: 'streetview' },
+  { name: 'All Competition-List', path: '/competition-list/CompetitionList', icon: 'format_list_numbered' },
   { name: 'Competition-Group', path: '/competition-group/CompetitionGroup', icon: 'bubble_chart' },
+  { name: 'Weekly Record', path: '/weekly-filter/WeeklyRecord', icon: 'filter_frames' },
   { name: 'Filter Record', path: '/filter/FilterRecord', icon: 'filter_frames' },
   { name: 'User Table', path: '/user-table/UserTable', icon: 'grid_on' },
   { label: 'PAGES', type: 'label' },

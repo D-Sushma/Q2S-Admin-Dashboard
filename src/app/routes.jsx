@@ -11,6 +11,7 @@ import MemberRegistrationRoutes from './views/registration/MemberRegistrationRou
 import CompetitionGroupRoutes from './views/competition-group/CompetitionGroupRoutes';
 import FilterRecordRoutes from './views/filter/FilterRecordRoutes';
 import UserTableRoute from './views/user-table/UserTableRoutes';
+import WeeklyRecordRoutes from './views/weekly-filter/WeeklyRecordRoutes';
 
 
 
@@ -22,12 +23,12 @@ const routes = [
         {/* <Registration /> */}
       </AuthGuard>
     ),
-    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...MemberRegistrationRoutes, ...CompetitionListRoutes, ...CompetitionGroupRoutes, ...FilterRecordRoutes, ...UserTableRoute],
+    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...MemberRegistrationRoutes, ...CompetitionListRoutes, ...CompetitionGroupRoutes, ...FilterRecordRoutes, ...UserTableRoute, ...WeeklyRecordRoutes],
   },
   ...sessionRoutes,
   { path: '/', element: <Navigate to="dashboard/default" /> },
   { path: '*', element: <NotFound /> },
-  
+
   // MEMBER REGISTRATION  or COMPETITION-LIST------------------------------------------
   { path: '/registration/MemberRegistration', element: <Navigate to="/registration/MemberRegistration" /> },
   // ...MemberRegistrationRoutes,
