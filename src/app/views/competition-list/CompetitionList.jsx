@@ -2,7 +2,6 @@ import { Button, Box, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, SimpleCard } from 'app/components';
 import CompetitionListTable from './Shared/CompetitionListTable';
-import SubjectAndDateRecord from '../filter/Shared/SubjectAndDateRecord';
 
 const CompetitionList = () => {
   // -------------FOR BACK BUTTON--------------------
@@ -35,7 +34,6 @@ const CompetitionList = () => {
             Go Back
           </Button>
         </Box>
-        <SubjectAndDateRecord />
         <Box sx={{ mt: 1 }}>
           <SimpleCard title="COMPETITION - LIST">
             <CompetitionListTable />

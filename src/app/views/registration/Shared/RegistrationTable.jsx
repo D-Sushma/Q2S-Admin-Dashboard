@@ -110,7 +110,8 @@ const PaginationTable = () => {
                   <TableCell align="center">{moment(joinUser.updated_at).format('DD/MM/YYYY')}</TableCell>
                   <TableCell align="center">{moment(joinUser.created_at).format('DD/MM/YYYY')}</TableCell>
                   <TableCell align="center">{moment(joinUser.expiry_date).format('DD/MM/YYYY')}</TableCell>
-                </TableRow>)
+                </TableRow>
+              )
             })}
         </TableBody>
       </StyledTable>

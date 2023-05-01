@@ -1,5 +1,5 @@
 import { Box, styled } from '@mui/material';
-import { MatxLogo } from 'app/components';
+// import { MatxLogo } from 'app/components';
 import useSettings from 'app/hooks/useSettings';
 import { Span } from './Typography';
 
@@ -24,7 +24,9 @@ const Brand = ({ children }) => {
   return (
     <BrandRoot>
       <Box display="flex" alignItems="center">
-        <MatxLogo />
+        {/* <MatxLogo /> */}
+        <img style={{ width: "30px", height: "30px", borderRadius: "5px" }}
+          src='/assets/images/q2s_image/q2s-logo.jpg' alt='q2s-logo' />
         <StyledSpan mode={mode} className="sidenavHoverShow">
           ADMIN PANEL
         </StyledSpan>

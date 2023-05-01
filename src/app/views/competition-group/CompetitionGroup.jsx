@@ -4,7 +4,6 @@ import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, SimpleCard } from 'app/components';
 import CompetitionGroupTable from './Shared/CompetitionGroupTable';
-import SubjectAndDateRecord from '../filter/Shared/SubjectAndDateRecord'
 
 const CompetitionList = () => {
   // -------------FOR BACK BUTTON--------------------
@@ -39,7 +38,6 @@ const CompetitionList = () => {
             Go Back
           </Button>
         </Box>
-        <SubjectAndDateRecord />
         <Box sx={{ mt: 1 }}>
           <SimpleCard title="COMPETITION - GROUP">
             <CompetitionGroupTable />

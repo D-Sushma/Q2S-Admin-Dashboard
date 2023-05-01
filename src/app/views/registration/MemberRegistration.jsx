@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, SimpleCard } from 'app/components';
 import RegistrationTable from './Shared/RegistrationTable';
-import SubjectAndDateRecord from '../filter/Shared/SubjectAndDateRecord';
+import TableData from './Shared/TableData'
 
 const MemberRegistration = () => {
   // -------------FOR BACK BUTTON--------------------
@@ -39,7 +39,9 @@ const MemberRegistration = () => {
               Go Back
             </Button>
           </Box>
-          <SubjectAndDateRecord />
+
+          <TableData />
+
           <Box sx={{ mt: 1 }}>
             <SimpleCard title="MEMBER REGISTRATION">
               <RegistrationTable />
