@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Breadcrumb, SimpleCard } from 'app/components';
 import { styled, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SubjectAndDateRecord from './Shared/SubjectAndDateRecord';
-// import TotalRecord from './Shared/TotalRecord';
 
-// ** make prop --> for data passing into sibling......
 export default function FilterRecord() {
-  // const [regRecord, setRegRecord] = useState([]);
-  const [regRecord, setRegRecord] = useState('');
 
   // -------------FOR BACK BUTTON--------------------
   const navigate = useNavigate();
 
-  // ...............FOR BREADCRUMB CONNTAINER COMPONENT.........................
+  // ...............FOR BREADCRUMB CONTAINER COMPONENT.........................
   const Container = styled('div')(({ theme }) => ({
     margin: '30px',
     height: '50%',
@@ -42,13 +38,8 @@ export default function FilterRecord() {
         </Box>
 
         <SimpleCard>
-          <SubjectAndDateRecord setRegRecord={setRegRecord} />
+          <SubjectAndDateRecord />
         </SimpleCard>
-        {/* <Box sx={{ mt: 1 }}>
-          <SimpleCard>
-            <TotalRecord regRecord={regRecord} />
-          </SimpleCard>
-        </Box> */}
 
       </Container>
     </>

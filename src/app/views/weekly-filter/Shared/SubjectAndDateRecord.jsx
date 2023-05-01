@@ -1,12 +1,29 @@
 import React from 'react';
 import moment from 'moment';
-import { SimpleCard } from 'app/components';
 // **  1..for loader - CircularProgress--> not use in submit fun
 import { MenuItem, Select, InputLabel, FormControl, CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Button, Icon, Box } from '@mui/material';
+import { Button, Icon, Box, Card, styled } from '@mui/material';
+// import { convertHexToRGB } from 'app/utils/utils';
 import { Span } from 'app/components/Typography';
 import { useNavigate } from 'react-router-dom';
+
+// ** card style
+const StyledCard = styled(Card)(({ theme }) => ({
+  boxShadow: 'none',
+  textAlign: 'center',
+  position: 'relative',
+  padding: '24px !important',
+  // background: `rgb(${convertHexToRGB(theme.palette.primary.main)}, 0.15) !important`,
+  background: '#F4F4F4',
+  [theme.breakpoints.down('sm')]: { padding: '16px !important' },
+}));
+const CardTitle = styled('div')(({ subtitle }) => ({
+  fontSize: '1rem',
+  fontWeight: '500',
+  textTransform: 'capitalize',
+  marginBottom: !subtitle && '16px',
+}));
 
 const options = [
   {
@@ -19,12 +36,15 @@ const options = [
   },
 ];
 
-export default function SubjectAndDateRecord({ setRegRecord }) {
+var lastDate = [];
+var totalRegData = [];
+var totalCompData = [];
+export default function SubjectAndDateRecord() {
   const navigate = useNavigate();
   // **  3..for loader - CircularProgress
   const [loading, setLoading] = useState(true)
   // ----------DB FETCH-----------------------------
-  const [expiryDate, setExpiryDate] = useState([]);
+  const [expiryDate, setExpiryDate] = useState(lastDate);
   const fetchData1 = async () => {
     // **  4..for loader - CircularProgress
     setLoading(true)
@@ -36,18 +56,25 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
         console.log('inside data subject date record', data.response);
         // **  4..for loader - CircularProgress
         setLoading(false)
-        setExpiryDate(data.response.dates);
+        lastDate = data.response.dates;
+        // setExpiryDate(data.response.dates);
+        setExpiryDate(lastDate);
+
       });
     // **  4..for loader - CircularProgress
     setLoading(false)
   };
   // console.log('expiryDate', expiryDate);
+  console.log('lastDate', lastDate)
   useEffect(() => {
     fetchData1();
   }, []);
 
   // .......................................................
-  const [submitData, setSubmitData] = useState([]);
+  // const [submitData, setSubmitData] = useState([]);
+  const [rData, setRData] = useState(totalRegData);
+  const [cData, setCData] = useState(totalCompData);
+
   const fetchSubmitData = async () => {
     try {
       var myHeaders = new Headers();
@@ -70,21 +97,24 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
         })
         .then((data) => {
           console.log('Get SUBMIT data', data);
+          // setSubmitData(data);
+          totalRegData = data.totalReg
+          totalCompData = data.totalComp
+          // setRData(data.totalReg);
+          // setCData(data.totalComp);
+          setRData(totalRegData);
+          setCData(totalCompData);
 
-          setSubmitData(data);
-          // setRegRecord(data);
+          console.log('totalRegData, totalCompData', totalRegData, totalCompData)
         });
     } catch (error) {
       console.log('error', error)
     }
-
   };
-  console.log('submitData---', submitData)
+  // console.log('submitData---', submitData)
   useEffect(() => {
     // fetchSubmitData();
   }, []);
-
-
 
   // ===============FOR SELECT OPTION IN WEEKLY RECORD======
   let [week_date, setWeek_date] = useState('');
@@ -112,13 +142,13 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
       <Box display="flex" justifyContent="space-between" alignItems="center" marginTop="0px">
 
         {/* // FOR SUBJECT RECORD................................................... */}
-        < SimpleCard SimpleCard title="GK/ENGLISH" >
+        < StyledCard >
+          <CardTitle>GK/ENGLISH</CardTitle>
           <Box sx={{ width: 300, height: 50, backgroundColor: "white" }}>
             <Box display="flex" border="1px solid white" justifyContent="space-evenly">
               <Box>
                 <FormControl sx={{ width: 300, marginTop: 0, marginLeft: 0 }}>
                   <InputLabel sx={{ background: "white", px: 0.5 }}>Select Subject Code...</InputLabel>
-                  {/* STEP-> 3.... value = subjectId goes into store */}
                   <Select value={subjectId} onChange={(e) => selectionOptionChangeHandler(e)} >
                     {options.map((option, index) => (
                       <MenuItem value={option.value} key={index}>
@@ -130,18 +160,17 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
               </Box>
             </Box>
           </Box>
-        </SimpleCard>
+        </StyledCard>
 
         {/* // FOR WEEKLY RECORD..................................................... */}
-        <SimpleCard title="WEEKLY">
+        <StyledCard>
+          <CardTitle>WEEKLY</CardTitle>
           <Box sx={{ width: 300, height: 50, backgroundColor: "white" }}>
             <Box display="flex" border="1px solid white" justifyContent="space-evenly">
               <Box>
                 <FormControl sx={{ width: 300, marginTop: 0, marginLeft: 0 }}>
                   <InputLabel sx={{ background: "white", px: 0.5 }}>Select Weekly Date...</InputLabel>
-                  {/* STEP-> 3.... value = weeklyDate goes into store */}
                   <Select value={weeklyDate} onChange={(e) => selectionChangeHandler(e)} >
-                    {/* //step E -----> */}
                     {expiryDate?.map((eDate, i) => (
                       <MenuItem value={eDate.expiryDate} key={i}>
                         {eDate.startDate} TO {eDate.expiryDate}
@@ -152,7 +181,7 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
               </Box>
             </Box>
           </Box>
-        </SimpleCard>
+        </StyledCard>
 
         {/* SUBMIT BUTTON ........................................................... */}
         <Button
@@ -162,8 +191,6 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
           sx={{ width: 100, height: 40 }}
           disabled={!subjectId || !weeklyDate}
           onClick={() => fetchSubmitData()}
-        // onClick={() => { fetchSubmitData(); f2() }}
-
         >
           <Icon>send</Icon>
           <Span sx={{ pl: 1, textTransform: 'capitalize' }}>Submit</Span>
@@ -182,11 +209,11 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
           <Button
             variant="outlined" color="primary"
             sx={{ width: 150 }}
-          // onClick={() => navigate('/filter/TotalRegistrationDetails', { state: regRecord.totalReg })}
-          // onClick={() => { (total_reg.length > 0) ? navigate('/filter/TotalRegistrationDetails', { state: total_reg }) : alert("change pattern!") }}
+            // onClick={() => navigate('/filter/TotalRegistrationDetails', { state: totalRegData })}
+            // onClick={() => navigate('/filter/TotalRegistrationDetails', { state: rData })}
+            onClick={() => { (rData.length > 0) ? navigate('/filter/TotalRegistrationDetails', { state: totalRegData }) : alert("No record for total Registration!") }}
           >
-            {'-'}
-            {/* {regRecord ? regRecord.totalReg.length : "-"} */}
+            {rData ? rData.length : '-'}
           </Button>
         </Box>
 
@@ -195,11 +222,10 @@ export default function SubjectAndDateRecord({ setRegRecord }) {
           <br />
           <br />
           <Button variant="outlined" color="primary" sx={{ width: 150 }}
-          // onClick={() => navigate('/filter/TotalCompetitionDetails', { state: regRecord.totalComp })}
-          // onClick={() => { total_comp.length > 0 ? navigate('/filter/TotalCompetitionDetails', { state: total_comp }) : alert('no data found check your details') }}
+            // onClick={() => navigate('/filter/TotalCompetitionDetails', { state: totalCompData })}
+            onClick={() => { totalCompData.length > 0 ? navigate('/filter/TotalCompetitionDetails', { state: cData }) : alert('No record for total Competition!') }}
           >
-            {'-'}
-            {/* {regRecord ? regRecord.totalComp.length : "-"} */}
+            {cData ? cData.length : '-'}
           </Button>
         </Box>
       </Box >
