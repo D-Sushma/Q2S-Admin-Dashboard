@@ -51,7 +51,8 @@ const PaginationTable = () => {
       })
       .then((data) => {
         console.log('inside JOIN data', data);
-        setJoin(data.response);
+        // setJoin(data.response);
+        setJoin(data.response.results);
       });
   };
   useEffect(() => {
