@@ -1,6 +1,6 @@
+import React from "react"
 import MUIDataTable from "mui-datatables";
 import { useState, useEffect } from "react";
-import moment from "moment";
 
 const columns = [
     {
@@ -16,7 +16,7 @@ const columns = [
         label: "USER ID",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         }
     },
     {
@@ -44,8 +44,7 @@ const columns = [
         }
     },
     {
-        name: "updated_at",
-        // name: moment("updated_at").format('DD/MM/YYYY'),
+        name: "updated",
         label: "UPDATED",
         options: {
             filter: true,
@@ -53,7 +52,7 @@ const columns = [
         }
     },
     {
-        name: "created_at",
+        name: "created",
         label: "CREATED",
         options: {
             filter: true,
@@ -61,7 +60,7 @@ const columns = [
         }
     },
     {
-        name: "expiry_date",
+        name: "expiryDate",
         label: "EXPIRY DATE",
         options: {
             filter: true,
@@ -71,16 +70,16 @@ const columns = [
 ];
 
 const options = {
-    filterType: "checkbox",
+    filterType: "multiselect",
+    // ** Other Some Options...
+    // filterType: "checkbox, textField, dropdown",
+    // filter: true,
+    // responsive: 'stacked',
+    // page: 2,
 };
-
-// let arr1 = [];
-// let arr2 = [];
 export default function Tables() {
     // ----------DB FETCH------------------------------
-    const [merged, setMerged] = useState([]);
-    // const [regMember, setRegMember] = useState([]);
-    // const [member, setMember] = useState([]);
+    const [regMember, setRegMember] = useState([]);
     const fetchJoinData = () => {
         fetch('http://localhost:4000/join')
             .then((response) => {
@@ -89,23 +88,10 @@ export default function Tables() {
             })
             .then((data) => {
                 console.log('inside JOIN data inside TableData', data);
-                // setRegMember(data.response.results);
-                // setMember(data.response.items);
-                var addArray = [];
-                var arr1 = data.response.results;
-                var arr2 = data.response.items;
-                addArray = addArray.concat(arr1, arr2);
-                // var storeObj = [];
-                // addArray.forEach(element => {
-                //     storeObj.push(element);
-                // });
-                // console.log('storeObj', storeObj)
-                setMerged(addArray)
+                setRegMember(data.response.items);
+
             });
     };
-    // console.log('regMember', regMember)
-    // console.log('member', member)
-    console.log('merged', merged)
     useEffect(() => {
         fetchJoinData();
     }, []);
@@ -114,11 +100,10 @@ export default function Tables() {
         <>
             <MUIDataTable
                 title={"MEMBER REGISTRATION"}
-                data={merged}
+                data={regMember}
                 columns={columns}
                 options={options}
             />
-
         </>
     );
 }
