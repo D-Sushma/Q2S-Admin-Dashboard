@@ -26,7 +26,7 @@ const MemberRegistration = () => {
         <Container>
           <Box className="breadcrumb" display="flex" justifyContent="space-between">
             <Breadcrumb
-              routeSegments={[{ name: 'Registration', path: '/registration' }, { name: 'Table' }]}
+              routeSegments={[{ name: 'Registration', path: '/registration/MemberRegistration' }, { name: 'Table' }]}
             />
             {/* // -------------FOR BACK BUTTON-------------------- */}
             <Button

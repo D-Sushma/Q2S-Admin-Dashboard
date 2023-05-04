@@ -3,6 +3,8 @@ import { Breadcrumb, SimpleCard } from 'app/components';
 import { styled, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SubjectAndDateRecord from './Shared/SubjectAndDateRecord';
+import TotalCompTableData from './Shared/TotalCompTableData';
+import TotalRegTableData from './Shared/TotalRegTableData';
 
 export default function FilterRecord() {
 
@@ -25,7 +27,7 @@ export default function FilterRecord() {
       <Container>
         <Box className="breadcrumb" display="flex" justifyContent="space-between">
           <Breadcrumb
-            routeSegments={[{ name: 'Filter Record', path: '/filter' }, { name: 'filter' }]}
+            routeSegments={[{ name: 'Filter Record', path: '/weekly-filter/WeeklyRecord' }, { name: 'Table' }]}
           />
           {/* // -------------FOR BACK BUTTON-------------------- */}
           <Button
@@ -36,7 +38,8 @@ export default function FilterRecord() {
             Go Back
           </Button>
         </Box>
-
+        <TotalCompTableData />
+        <TotalRegTableData />
         <SimpleCard>
           <SubjectAndDateRecord />
         </SimpleCard>

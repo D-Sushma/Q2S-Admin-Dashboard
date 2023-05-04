@@ -33,7 +33,7 @@ const PaginationTable = () => {
       })
       .then((data) => {
         console.log('inside data f competition list', data);
-        setUsers(data.response);
+        setUsers(data.response.results);
       })
   };
   console.log('after pagination table');

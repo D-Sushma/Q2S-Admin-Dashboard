@@ -29,7 +29,7 @@ export default function FilterRecord() {
       <Container>
         <Box className="breadcrumb" display="flex" justifyContent="space-between">
           <Breadcrumb
-            routeSegments={[{ name: 'Filter Record', path: '/filter' }, { name: 'filter' }]}
+            routeSegments={[{ name: 'Filter Record', path: '/filter/FilterRecord' }, { name: 'Table' }]}
           />
           {/* // -------------FOR BACK BUTTON-------------------- */}
           <Button

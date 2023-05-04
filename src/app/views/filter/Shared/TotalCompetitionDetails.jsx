@@ -76,7 +76,7 @@ const TotalCompetitionDetails = () => {
                     </Box>
                 </Box>
 
-                <SimpleCard title="More Details Table">
+                <SimpleCard title="TOTAL COMPETITION">
                     <Box width="100%" overflow="auto">
                         <StyledTable sx={{ tableLayout: 'auto' }} bgcolor="#fafafa">
                             <TableHead bgcolor="#e0f7fa">

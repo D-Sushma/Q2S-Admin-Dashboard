@@ -4,6 +4,7 @@ import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, SimpleCard } from 'app/components';
 import CompetitionGroupTable from './Shared/CompetitionGroupTable';
+import CompGroupTableData from './Shared/CompGroupTableData';
 
 const CompetitionList = () => {
   // -------------FOR BACK BUTTON--------------------
@@ -25,7 +26,7 @@ const CompetitionList = () => {
         <Box className="breadcrumb" display="flex" justifyContent="space-between">
           <Breadcrumb
             routeSegments={[
-              { name: 'Competition-Group', path: '/Competition-Group' },
+              { name: 'Competition-Group', path: '/competition-group/CompetitionGroup' },
               { name: 'Table' },
             ]}
           />
@@ -38,6 +39,7 @@ const CompetitionList = () => {
             Go Back
           </Button>
         </Box>
+        <CompGroupTableData />
         <Box sx={{ mt: 1 }}>
           <SimpleCard title="COMPETITION - GROUP">
             <CompetitionGroupTable />

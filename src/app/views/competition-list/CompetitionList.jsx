@@ -2,6 +2,7 @@ import { Button, Box, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, SimpleCard } from 'app/components';
 import CompetitionListTable from './Shared/CompetitionListTable';
+import CompListTableData from './Shared/CompListTableData';
 
 const CompetitionList = () => {
   // -------------FOR BACK BUTTON--------------------
@@ -21,7 +22,7 @@ const CompetitionList = () => {
         <Box className="breadcrumb" display="flex" justifyContent="space-between">
           <Breadcrumb
             routeSegments={[
-              { name: 'Competition-List', path: '/competition-list' },
+              { name: 'Competition-List', path: '/competition-list/CompetitionList' },
               { name: 'Table' },
             ]}
           />
@@ -34,6 +35,7 @@ const CompetitionList = () => {
             Go Back
           </Button>
         </Box>
+        <CompListTableData />
         <Box sx={{ mt: 1 }}>
           <SimpleCard title="COMPETITION - LIST">
             <CompetitionListTable />

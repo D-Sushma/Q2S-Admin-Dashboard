@@ -211,7 +211,7 @@ export default function SubjectAndDateRecord() {
             sx={{ width: 150 }}
             // onClick={() => navigate('/filter/TotalRegistrationDetails', { state: totalRegData })}
             // onClick={() => navigate('/filter/TotalRegistrationDetails', { state: rData })}
-            onClick={() => { (rData.length > 0) ? navigate('/filter/TotalRegistrationDetails', { state: totalRegData }) : alert("No record for total Registration!") }}
+            onClick={() => { (rData.length > 0) ? navigate('/weekly-filter/TotalRegistrationDetails', { state: totalRegData }) : alert("No record for total Registration!") }}
           >
             {rData ? rData.length : '-'}
           </Button>
@@ -223,7 +223,7 @@ export default function SubjectAndDateRecord() {
           <br />
           <Button variant="outlined" color="primary" sx={{ width: 150 }}
             // onClick={() => navigate('/filter/TotalCompetitionDetails', { state: totalCompData })}
-            onClick={() => { totalCompData.length > 0 ? navigate('/filter/TotalCompetitionDetails', { state: cData }) : alert('No record for total Competition!') }}
+            onClick={() => { totalCompData.length > 0 ? navigate('/weekly-filter/TotalCompetitionDetails', { state: cData }) : alert('No record for total Competition!') }}
           >
             {cData ? cData.length : '-'}
           </Button>
