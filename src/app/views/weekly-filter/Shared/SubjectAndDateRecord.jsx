@@ -39,6 +39,9 @@ const options = [
 var lastDate = [];
 var totalRegData = [];
 var totalCompData = [];
+// ** for mui-datatables package (all work from backenf & set here...)
+var totalRegItems = [];
+var totalCompItems = [];
 export default function SubjectAndDateRecord() {
   const navigate = useNavigate();
   // **  3..for loader - CircularProgress
@@ -72,9 +75,12 @@ export default function SubjectAndDateRecord() {
 
   // .......................................................
   // const [submitData, setSubmitData] = useState([]);
+  // **  PREVIOUS
   const [rData, setRData] = useState(totalRegData);
   const [cData, setCData] = useState(totalCompData);
-
+  // ** for mui-datatables package (all work from backend & set here...)
+  const [regData, setRegData] = useState(totalRegItems);
+  const [compData, setCompData] = useState(totalCompItems);
   const fetchSubmitData = async () => {
     try {
       var myHeaders = new Headers();
@@ -98,14 +104,25 @@ export default function SubjectAndDateRecord() {
         .then((data) => {
           console.log('Get SUBMIT data', data);
           // setSubmitData(data);
+          // **  PREVIOUS
           totalRegData = data.totalReg
           totalCompData = data.totalComp
+          // ------------------------------------
           // setRData(data.totalReg);
           // setCData(data.totalComp);
+          // ------------------------------
+          // **  PREVIOUS
           setRData(totalRegData);
           setCData(totalCompData);
+          // ** for mui-datatables package (all work from backend & set here...)
+          totalRegItems = data.totalRegItems
+          totalCompItems = data.totalCompItems
+          setRegData(totalRegItems)
+          setCompData(totalCompItems)
 
-          console.log('totalRegData, totalCompData', totalRegData, totalCompData)
+          console.log('totalRegItems, totalCompItems', totalRegItems, totalCompItems)
+          // **  PREVIOUS
+          // console.log('totalRegData, totalCompData', totalRegData, totalCompData)
         });
     } catch (error) {
       console.log('error', error)
@@ -211,9 +228,16 @@ export default function SubjectAndDateRecord() {
             sx={{ width: 150 }}
             // onClick={() => navigate('/filter/TotalRegistrationDetails', { state: totalRegData })}
             // onClick={() => navigate('/filter/TotalRegistrationDetails', { state: rData })}
-            onClick={() => { (rData.length > 0) ? navigate('/weekly-filter/TotalRegistrationDetails', { state: totalRegData }) : alert("No record for total Registration!") }}
+            // onClick={() => { (totalRegData.length > 0) ? navigate('/weekly-filter/TotalRegistrationDetails', { state: totalRegData }) : alert("No record for total Registration!") }}
+            // ~~~~~~~~~~~~~~ *** OR *** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            // onClick={() => { (rData.length > 0) ? navigate('/weekly-filter/TotalRegistrationDetails', { state: totalRegData }) : alert("No record for total Registration!") }}
+            // ~~~~~~~~~~~~~~ *** OR *** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            // onClick={() => { (rData.length > 0) ? navigate('/weekly-filter/TotalRegistrationDetails', { state: rData }) : alert("No record for total Registration!") }}
+            onClick={() => { (regData.length > 0) ? navigate('/weekly-filter/TotalRegTableData', { state: regData }) : alert("No record for total Registration!") }}
           >
-            {rData ? rData.length : '-'}
+            {regData ? regData.length : '-'}
+            {/* PREVIOUS-------- */}
+            {/* {rData ? rData.length : '-'} */}
           </Button>
         </Box>
 
@@ -223,9 +247,14 @@ export default function SubjectAndDateRecord() {
           <br />
           <Button variant="outlined" color="primary" sx={{ width: 150 }}
             // onClick={() => navigate('/filter/TotalCompetitionDetails', { state: totalCompData })}
-            onClick={() => { totalCompData.length > 0 ? navigate('/weekly-filter/TotalCompetitionDetails', { state: cData }) : alert('No record for total Competition!') }}
+            // onClick={() => { totalCompData.length > 0 ? navigate('/weekly-filter/TotalCompetitionDetails', { state: totalCompData }) : alert('No record for total Competition!') }}
+            // ~~~~~~~~~~~~~~ *** OR *** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            // onClick={() => { cData.length > 0 ? navigate('/weekly-filter/TotalCompetitionDetails', { state: cData }) : alert('No record for total Competition!') }}
+            onClick={() => { compData.length > 0 ? navigate('/weekly-filter/TotalCompTableData', { state: compData }) : alert('No record for total Competition!') }}
           >
-            {cData ? cData.length : '-'}
+            {compData ? compData.length : '-'}
+            {/* PREVIOUS-------- */}
+            {/* {cData ? cData.length : '-'} */}
           </Button>
         </Box>
       </Box >

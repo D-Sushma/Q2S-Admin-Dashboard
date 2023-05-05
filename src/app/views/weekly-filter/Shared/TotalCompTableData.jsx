@@ -1,10 +1,33 @@
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
-import { useLocation } from 'react-router-dom';
+import { Breadcrumb } from 'app/components';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { styled, Box, Button } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const getMuiTheme = () => createTheme({
+    components: {
+        MUIDataTableBodyCell: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: "#f4f4f4",
+                    // innerHeight: "20px",
+                    margin: 0,
+                    padding: 0,
+                    textAlign: "center",
+                    '&:nth-child(2)': {
+                        // width: 30,
+                        height: "auto",
+                    }
+                }
+            }
+        },
+    },
+})
 
 const columns = [
     {
-        name: "sno",
+        name: "id",
         label: "SNO",
         option: {
             filter: true,
@@ -12,7 +35,7 @@ const columns = [
         }
     },
     {
-        name: "competition_group_id",
+        name: "p1_name",
         label: "PLAYER1(p1)",
         option: {
             filter: true,
@@ -20,7 +43,7 @@ const columns = [
         }
     },
     {
-        name: "subject",
+        name: "p2_name",
         label: "PLAYER2(p2)",
         option: {
             filter: true,
@@ -28,7 +51,7 @@ const columns = [
         }
     },
     {
-        name: "p1_name",
+        name: "p1_correct_count",
         label: "POINT P1",
         option: {
             filter: true,
@@ -36,7 +59,7 @@ const columns = [
         }
     },
     {
-        name: "p2_name",
+        name: "p2_correct_count",
         label: "POINT P2",
         option: {
             filter: true,
@@ -44,7 +67,7 @@ const columns = [
         }
     },
     {
-        name: "test_date",
+        name: "p1_time_taken",
         label: "P1 TIME",
         option: {
             filter: true,
@@ -52,7 +75,7 @@ const columns = [
         }
     },
     {
-        name: "subscription",
+        name: "p1_time_taken",
         label: "P2 TIME",
         option: {
             filter: true,
@@ -60,7 +83,7 @@ const columns = [
         }
     },
     {
-        name: "subscription",
+        name: "winner_id",
         label: "WINNER",
         option: {
             filter: true,
@@ -84,7 +107,7 @@ const columns = [
         }
     },
     {
-        name: "slot_end",
+        name: "is_walk_over",
         label: "WALK OVER",
         option: {
             filter: true,
@@ -114,20 +137,47 @@ const Options = {
     // }
 }
 export default function CompListTableData() {
-    // // ** -------------By useLocation we get  prop from totalRecord
-    // const { state } = useLocation();
-    // console.log('state total Comp', state)
-    // console.log('hello C-----------')
+    // ** -------------By useLocation we get  prop from totalRecord
+    const { state } = useLocation();
+    console.log('state total Comp', state)
+
+    // -------------FOR BACK BUTTON--------------------
+    const navigate = useNavigate();
+    // ...............FOR BREADCRUMB CONTAINER COMPONENT.........................
+    const Container = styled('div')(({ theme }) => ({
+        margin: '30px',
+        [theme.breakpoints.down('sm')]: { margin: '16px' },
+        '& .breadcrumb': {
+            marginBottom: '30px',
+            [theme.breakpoints.down('sm')]: { marginBottom: '16px' },
+        },
+    }));
+
     return (
         <>
-            <div className="App wrapper">
+            <Container>
+                <Box className="breadcrumb" display="flex" justifyContent="space-between">
+                    <Breadcrumb
+                        routeSegments={[{ name: 'Total Competition', path: '/weekly-filter' }, { name: 'Table' }]}
+                    />
+                    {/* // -------------FOR BACK BUTTON-------------------- */}
+                    <Button
+                        color="primary"
+                        variant="outlined"
+                        onClick={() => navigate(-1)}
+                    >
+                        Go Back
+                    </Button>
+                </Box>
+            </Container>
+            <ThemeProvider theme={getMuiTheme()}>
                 <MUIDataTable
                     title={"TOTAL COMPETITION"}
                     columns={columns}
-                    // data={state}
+                    data={state}
                     options={Options}
                 />
-            </div>
+            </ThemeProvider>
         </>
     )
 }

@@ -48,15 +48,29 @@ const columns = [
         label: "MORE DETAILS",
         options: {
             filter: false,
-            sort: false,
-            empty: false,
-            filter: false,
+            // sort: false,
+            // empty: false,
             customBodyRender: (value, tableMeta, updateValue) => {
                 return (
                     <>
-                        <Link to={{
+                        {/* {value.map((e) => {
+                            return (
+                                <Link to={`/competition-group/MoreDetailsTable/${e.competition_group_name}`} >
+                                    <Button
+                                        color="primary"
+                                        variant="outlined"
+                                        sx={{ width: 100, padding: 0, margin: 0 }}
+                                    >
+                                        More-Details
+                                    </Button>
+                                </Link>
+                            )
+                        }).join(', ')} */}
+                        {/* <Link to={`/competition-group/MoreDetailsTable/${updateValue.competition_group_name}`}> */}
+                        {/* <Link to={{
                             pathname: `/competition-group/MoreDetailsTable`,
-                        }}>
+                        }}>  */}
+                        <a href={`/competition-group/MoreDetailsTable/${tableMeta.competition_group_name}`}>
                             <Button
                                 color="primary"
                                 variant="outlined"
@@ -64,7 +78,8 @@ const columns = [
                             >
                                 More-Details
                             </Button>
-                        </Link>
+                        </a>
+                        {/* </Link> */}
                     </>
                 );
             }
