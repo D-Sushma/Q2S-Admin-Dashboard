@@ -3,7 +3,7 @@ import { styled, Button, Box } from '@mui/material';
 import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, SimpleCard } from 'app/components';
-import RegistrationTable from './Shared/RegistrationTable';
+// import RegistrationTable from './Shared/RegistrationTable';
 import RegTableData from './Shared/RegTableData';
 
 const MemberRegistration = () => {
@@ -42,11 +42,11 @@ const MemberRegistration = () => {
 
           <RegTableData />
 
-          <Box sx={{ mt: 1 }}>
+          {/* <Box sx={{ mt: 1 }}>
             <SimpleCard title="MEMBER REGISTRATION">
               <RegistrationTable />
             </SimpleCard>
-          </Box>
+          </Box> */}
         </Container>
       </Fragment>
     </>

@@ -86,10 +86,11 @@ const PaginationTable = () => {
 
                     {/* <Link to={`/competition-group/MoreDetailsTable/${user.competition_group_id}`}> */}
                     <Link to={{
-                      pathname: `/competition-group/MoreDetailsTable/${user.competition_group_id}`,
+                      // pathname: `/competition-group/MoreDetailsTable/${user.competition_group_id}`,
+                      pathname: `/competition-group/MoreDetailsTableData/${user.competition_group_id}`,
                     }}>
                       <Button
-                        // onClick={() => navigate(`/competition-group/MoreDetailsTable/${user.competition_group_id}`)}
+                        // onClick={() => navigate(`/ competition - group / MoreDetailsTable / ${user.competition_group_id}`)}
                         // onClick={() => navigate(`/competition-group/MoreDetailsTable`)}
                         color="primary"
                         variant="outlined"
@@ -104,7 +105,7 @@ const PaginationTable = () => {
               )
             })}
         </TableBody>
-      </StyledTable>
+      </StyledTable >
 
       <TablePagination
         text-44
@@ -118,7 +119,7 @@ const PaginationTable = () => {
         nextIconButtonProps={{ 'aria-label': 'Next Page' }}
         backIconButtonProps={{ 'aria-label': 'Previous Page' }}
       />
-    </Box>
+    </Box >
   );
 };
 

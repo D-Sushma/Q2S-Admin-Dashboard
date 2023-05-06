@@ -39,7 +39,8 @@ const MoreDetailsTable = () => {
       })
       .then((data) => {
         console.log('inside data of more details', data);
-        setUsers(data.response);
+        // setUsers(data.response);
+        setUsers(data.results);
       });
   };
   console.log('after pagination table');

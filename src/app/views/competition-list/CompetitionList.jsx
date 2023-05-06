@@ -1,7 +1,7 @@
 import { Button, Box, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, SimpleCard } from 'app/components';
-import CompetitionListTable from './Shared/CompetitionListTable';
+// import CompetitionListTable from './Shared/CompetitionListTable';
 import CompListTableData from './Shared/CompListTableData';
 
 const CompetitionList = () => {
@@ -36,11 +36,11 @@ const CompetitionList = () => {
           </Button>
         </Box>
         <CompListTableData />
-        <Box sx={{ mt: 1 }}>
+        {/* <Box sx={{ mt: 1 }}>
           <SimpleCard title="COMPETITION - LIST">
             <CompetitionListTable />
           </SimpleCard>
-        </Box>
+        </Box> */}
       </Container>
     </>
   );
