@@ -32,8 +32,8 @@ const PaginationTable = () => {
         return response.json();
       })
       .then((data) => {
-        //  console.log("inside data",data);
-        setUsers(data.response);
+        console.log("inside data", data);
+        setUsers(data.response.results);
       });
   };
   console.log('after pagination table');

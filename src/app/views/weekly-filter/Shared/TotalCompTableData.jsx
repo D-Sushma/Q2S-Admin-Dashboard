@@ -119,7 +119,7 @@ const columns = [
 const Options = {
     filterType: "multiselect",
     rowsPerPage: [5],
-    rowsPerPageOptions: [5, 10, 20, 50, 100],
+    rowsPerPageOptions: [10, 20, 50, 100],
     jumpToPage: true,
     // textLabels: {
     //     pagination: {

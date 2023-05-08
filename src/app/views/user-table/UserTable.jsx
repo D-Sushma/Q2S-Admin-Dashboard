@@ -3,7 +3,8 @@ import { styled, Button, Box } from '@mui/material';
 import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, SimpleCard } from 'app/components';
-import UserTableList from './Shared/UserTableList';
+// import UserTableList from './Shared/UserTableList';
+import UserTableData from './Shared/UserTableData';
 
 const UserTable = () => {
   // -------------FOR BACK BUTTON--------------------
@@ -37,9 +38,10 @@ const UserTable = () => {
             </Button>
           </Box>
 
-          <SimpleCard title="USER TABLE LIST">
+          <UserTableData />
+          {/* <SimpleCard title="USER TABLE LIST">
             <UserTableList />
-          </SimpleCard>
+          </SimpleCard> */}
         </Container>
       </Fragment>
     </>

@@ -121,7 +121,7 @@ const columns = [
 const options = {
     filterType: "multiselect",
     rowsPerPage: [5],
-    rowsPerPageOptions: [5, 10, 25, 100],
+    rowsPerPageOptions: [10, 25, 50, 100],
     jumpToPage: true,
     // ** Other Some Options...
     // filterType: "checkbox, textField, dropdown",
