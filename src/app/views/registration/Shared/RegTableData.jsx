@@ -3,25 +3,28 @@ import MUIDataTable from "mui-datatables";
 import { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// const getMuiTheme = () => createTheme({
-//     components: {
-//         MUIDataTableBodyCell: {
-//             styleOverrides: {
-//                 root: {
-//                     backgroundColor: "#f4f4f4",
-//                     // innerHeight: "20px",
-//                     margin: 0,
-//                     padding: 0,
-//                     // textAlign: "center",
-//                     '&:nth-child(2)': {
-//                         // width: 30,
-//                         height: "auto",
-//                     }
-//                 }
-//             }
-//         },
-//     },
-// })
+const getMuiTheme = () => createTheme({
+    components: {
+        MUIDataTableBodyCell: {
+            styleOverrides: {
+                root: {
+                    // border: 'solid 1px #000',
+                    backgroundColor: "#f4f4f4",
+                    // innerHeight: "20px",
+                    margin: 0,
+                    padding: 5,
+                    // textAlign: "center",
+                    '&:nth-child(8)': {
+                        // width: 30,
+                        height: "auto",
+                        // backgroundColor: 'red',
+                        // textAlign: 'center',
+                    }
+                }
+            }
+        },
+    },
+})
 
 const columns = [
     {
@@ -45,7 +48,7 @@ const columns = [
         label: "SUBJECT",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         }
     },
     {
@@ -53,7 +56,7 @@ const columns = [
         label: "SUBSCRIPTION",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         }
     },
     {
@@ -61,7 +64,7 @@ const columns = [
         label: "STATUS",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         }
     },
     {
@@ -69,7 +72,7 @@ const columns = [
         label: "UPDATED",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         }
     },
     {
@@ -77,7 +80,7 @@ const columns = [
         label: "CREATED",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         }
     },
     {
@@ -85,7 +88,7 @@ const columns = [
         label: "EXPIRY DATE",
         options: {
             filter: true,
-            sort: false,
+            sort: true,
         }
     },
 ];
@@ -95,6 +98,7 @@ const options = {
     rowsPerPage: [5],
     rowsPerPageOptions: [10, 25, 50, 100],
     jumpToPage: true,
+    selectableRows: false,
     // ** Other Some Options...
     // filterType: "checkbox, textField, dropdown",
     // filter: true,
@@ -122,14 +126,14 @@ export default function Tables() {
     // ----------DB FETCH END-------------------------
     return (
         <>
-            {/* <ThemeProvider theme={getMuiTheme()}> */}
-            <MUIDataTable
-                title={"MEMBER REGISTRATION"}
-                data={regMember}
-                columns={columns}
-                options={options}
-            />
-            {/* </ThemeProvider> */}
+            <ThemeProvider theme={getMuiTheme()}>
+                <MUIDataTable
+                    title={"MEMBER REGISTRATION"}
+                    data={regMember}
+                    columns={columns}
+                    options={options}
+                />
+            </ThemeProvider>
         </>
     );
 }

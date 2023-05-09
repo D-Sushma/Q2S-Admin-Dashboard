@@ -7,8 +7,6 @@ import {
   FormControlLabel,
   Grid,
   Icon,
-  Radio,
-  RadioGroup,
   styled,
 } from "@mui/material";
 import { Span } from "app/components/Typography";
@@ -22,15 +20,18 @@ const TextField = styled(TextValidator)(() => ({
 
 const SimpleForm = () => {
   const [state, setState] = useState({ date: new Date() });
+  const [state1, setState1] = useState({ date: new Date() });
+  const [state2, setState2] = useState({ date: new Date() });
+  const [state3, setState3] = useState({ date: new Date() });
 
-  useEffect(() => {
-    ValidatorForm.addValidationRule("isPasswordMatch", (value) => {
-      if (value !== state.password) return false;
+  // useEffect(() => {
+  //   ValidatorForm.addValidationRule("isPasswordMatch", (value) => {
+  //     if (value !== state.password) return false;
 
-      return true;
-    });
-    return () => ValidatorForm.removeValidationRule("isPasswordMatch");
-  }, [state.password]);
+  //     return true;
+  //   });
+  //   return () => ValidatorForm.removeValidationRule("isPasswordMatch");
+  // }, [state.password]);
 
   const handleSubmit = (event) => {
     // console.log("submitted");
@@ -42,18 +43,17 @@ const SimpleForm = () => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
 
-  const handleDateChange = (date) => setState({ ...state, date });
+  const handleDateChange1 = (date) => setState1({ ...state1, date });
+  const handleDateChange2 = (date) => setState2({ ...state2, date });
+  const handleDateChange3 = (date) => setState3({ ...state3, date });
 
   const {
-    username,
     firstName,
-    creditCard,
-    mobile,
-    password,
-    confirmPassword,
-    gender,
+    lastName,
+    subject,
+    subscription,
+    status,
     date,
-    email,
   } = state;
 
   return (
@@ -63,17 +63,6 @@ const SimpleForm = () => {
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
             <TextField
               type="text"
-              name="username"
-              id="standard-basic"
-              value={username || ""}
-              onChange={handleChange}
-              errorMessages={["this field is required"]}
-              label="Username (Min length 4, Max length 9)"
-              validators={["required", "minStringLength: 4", "maxStringLength: 9"]}
-            />
-
-            <TextField
-              type="text"
               name="firstName"
               label="First Name"
               onChange={handleChange}
@@ -81,100 +70,90 @@ const SimpleForm = () => {
               validators={["required"]}
               errorMessages={["this field is required"]}
             />
-
             <TextField
-              type="email"
-              name="email"
-              label="Email"
-              value={email || ""}
+              type="text"
+              name="subject"
+              label="Subject"
               onChange={handleChange}
-              validators={["required", "isEmail"]}
-              errorMessages={["this field is required", "email is not valid"]}
-            />
-
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                value={date}
-                onChange={handleDateChange}
-                renderInput={(props) => (
-                  <TextField
-                    {...props}
-                    label="Date picker"
-                    id="mui-pickers-date"
-                    sx={{ mb: 2, width: "100%" }}
-                  />
-                )}
-              />
-            </LocalizationProvider>
-
-            <TextField
-              sx={{ mb: 4 }}
-              type="number"
-              name="creditCard"
-              label="Credit Card"
-              onChange={handleChange}
-              value={creditCard || ""}
+              value={subject || ""}
+              validators={["required"]}
               errorMessages={["this field is required"]}
-              validators={["required", "minStringLength:16", "maxStringLength: 16"]}
+            />
+            <TextField
+              type="text"
+              name="subscription"
+              label="Subscription"
+              onChange={handleChange}
+              value={subscription || ""}
+              validators={["required"]}
+              errorMessages={["this field is required"]}
+            />
+            <TextField
+              type="text"
+              name="status"
+              label="Status"
+              onChange={handleChange}
+              value={status || ""}
+              validators={["required"]}
+              errorMessages={["this field is required"]}
             />
           </Grid>
 
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
             <TextField
               type="text"
-              name="mobile"
-              value={mobile || ""}
-              label="Mobile Nubmer"
+              name="lastName"
+              label="Last Name"
               onChange={handleChange}
+              value={lastName || ""}
               validators={["required"]}
               errorMessages={["this field is required"]}
             />
-            <TextField
-              name="password"
-              type="password"
-              label="Password"
-              value={password || ""}
-              onChange={handleChange}
-              validators={["required"]}
-              errorMessages={["this field is required"]}
-            />
-            <TextField
-              type="password"
-              name="confirmPassword"
-              onChange={handleChange}
-              label="Confirm Password"
-              value={confirmPassword || ""}
-              validators={["required", "isPasswordMatch"]}
-              errorMessages={["this field is required", "password didn't match"]}
-            />
-            <RadioGroup
-              row
-              name="gender"
-              sx={{ mb: 2 }}
-              value={gender || ""}
-              onChange={handleChange}
-            >
-              <FormControlLabel
-                value="Male"
-                label="Male"
-                labelPlacement="end"
-                control={<Radio color="secondary" />}
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                value={date}
+                onChange={handleDateChange1}
+                renderInput={(props) => (
+                  <TextField
+                    // {...props}
+                    type="date"
+                    label="Updated At"
+                    id="mui-pickers-date"
+                    sx={{ mb: 2, width: "100%" }}
+                  />
+                )}
               />
-
-              <FormControlLabel
-                value="Female"
-                label="Female"
-                labelPlacement="end"
-                control={<Radio color="secondary" />}
+            </LocalizationProvider>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                value={date}
+                onChange={handleDateChange2}
+                renderInput={(props) => (
+                  <TextField
+                    // {...props}
+                    type="date"
+                    label="Created At"
+                    id="mui-pickers-date"
+                    sx={{ mb: 2, width: "100%" }}
+                  />
+                )}
               />
-
-              <FormControlLabel
-                value="Others"
-                label="Others"
-                labelPlacement="end"
-                control={<Radio color="secondary" />}
+            </LocalizationProvider>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                value={date}
+                onChange={handleDateChange3}
+                renderInput={(props) => (
+                  <TextField
+                    // {...props}
+                    type="date"
+                    label="Expiry Date"
+                    id="mui-pickers-date"
+                    sx={{ mb: 2, width: "100%" }}
+                  />
+                )}
               />
-            </RadioGroup>
+            </LocalizationProvider>
 
             <FormControlLabel
               control={<Checkbox />}

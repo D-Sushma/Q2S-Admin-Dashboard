@@ -26,7 +26,7 @@ const UserTable = () => {
         <Container>
           <Box className="breadcrumb" display="flex" justifyContent="space-between">
             <Breadcrumb
-              routeSegments={[{ name: 'User Table', path: '/user-table' }, { name: 'Table' }]}
+              routeSegments={[{ name: 'User Table', path: '/user-table/UserTable' }, { name: 'Table' }]}
             />
             {/* // -------------FOR BACK BUTTON-------------------- */}
             <Button

@@ -61,9 +61,9 @@ const PaginationTable = () => {
 
   return (
     <Box width="100%" overflow="auto">
-      <StyledTable sx={{ tableLayout: 'auto' }} bgcolor="#fafafa">
-        <TableHead bgcolor="#e0f7fa">
-          <TableRow>
+      <StyledTable sx={{ tableLayout: 'auto', margin: 0, padding: 0 }} bgcolor="#f4f4f4">
+        <TableHead bgcolor="#fafafa">
+          <TableRow >
             <TableCell align="center">SNO</TableCell>
             <TableCell align="center">COMPETITION GROUP ID</TableCell>
             <TableCell align="center">TOTAL COMPETITION</TableCell>

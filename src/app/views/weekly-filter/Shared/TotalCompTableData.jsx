@@ -13,7 +13,7 @@ const getMuiTheme = () => createTheme({
                     backgroundColor: "#f4f4f4",
                     // innerHeight: "20px",
                     margin: 0,
-                    padding: 0,
+                    padding: 5,
                     textAlign: "center",
                     '&:nth-child(2)': {
                         // width: 30,
@@ -121,6 +121,7 @@ const Options = {
     rowsPerPage: [5],
     rowsPerPageOptions: [10, 20, 50, 100],
     jumpToPage: true,
+    selectableRows: false,
     // textLabels: {
     //     pagination: {
     //         next: "Next >",
