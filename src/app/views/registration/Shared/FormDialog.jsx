@@ -27,17 +27,18 @@ export default function FormDialog() {
 
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogActions>
+          <Button variant="outlined" color="error" onClick={handleClose} sx={{ mt: "-50px", mr: 2 }}>
+            X
+          </Button>
+          {/* <Button onClick={handleClose} color="primary">
+            Subscribe
+          </Button> */}
+        </DialogActions>
         <DialogContent>
           <AddNewReg />
         </DialogContent>
-        <DialogActions>
-          <Button variant="outlined" color="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button>
-        </DialogActions>
+
       </Dialog>
     </Box>
   );

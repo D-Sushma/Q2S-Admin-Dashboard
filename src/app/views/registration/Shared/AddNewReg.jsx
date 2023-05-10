@@ -19,19 +19,7 @@ const TextField = styled(TextValidator)(() => ({
 }));
 
 const SimpleForm = () => {
-  const [state, setState] = useState({ date: new Date() });
-  const [state1, setState1] = useState({ date: new Date() });
-  const [state2, setState2] = useState({ date: new Date() });
-  const [state3, setState3] = useState({ date: new Date() });
-
-  // useEffect(() => {
-  //   ValidatorForm.addValidationRule("isPasswordMatch", (value) => {
-  //     if (value !== state.password) return false;
-
-  //     return true;
-  //   });
-  //   return () => ValidatorForm.removeValidationRule("isPasswordMatch");
-  // }, [state.password]);
+  const [state, setState] = useState({ updateDate: new Date() });
 
   const handleSubmit = (event) => {
     // console.log("submitted");
@@ -43,9 +31,9 @@ const SimpleForm = () => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
 
-  const handleDateChange1 = (date) => setState1({ ...state1, date });
-  const handleDateChange2 = (date) => setState2({ ...state2, date });
-  const handleDateChange3 = (date) => setState3({ ...state3, date });
+  const handleDateChange = (updateDate) => setState({ ...state, updateDate });
+  const handleDateChange2 = (createDate) => setState({ ...state, createDate });
+  const handleDateChange3 = (expiryDate) => setState({ ...state, expiryDate });
 
   const {
     firstName,
@@ -53,7 +41,9 @@ const SimpleForm = () => {
     subject,
     subscription,
     status,
-    date,
+    updateDate,
+    createDate,
+    expiryDate
   } = state;
 
   return (
@@ -68,7 +58,7 @@ const SimpleForm = () => {
               onChange={handleChange}
               value={firstName || ""}
               validators={["required"]}
-              errorMessages={["this field is required"]}
+              errorMessages={["First name is required"]}
             />
             <TextField
               type="text"
@@ -77,7 +67,7 @@ const SimpleForm = () => {
               onChange={handleChange}
               value={subject || ""}
               validators={["required"]}
-              errorMessages={["this field is required"]}
+              errorMessages={["subject is required"]}
             />
             <TextField
               type="text"
@@ -107,16 +97,15 @@ const SimpleForm = () => {
               onChange={handleChange}
               value={lastName || ""}
               validators={["required"]}
-              errorMessages={["this field is required"]}
+              errorMessages={["Last name is required"]}
             />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
-                value={date}
-                onChange={handleDateChange1}
+                value={updateDate}
+                onChange={handleDateChange}
                 renderInput={(props) => (
                   <TextField
-                    // {...props}
-                    type="date"
+                    {...props}
                     label="Updated At"
                     id="mui-pickers-date"
                     sx={{ mb: 2, width: "100%" }}
@@ -126,11 +115,11 @@ const SimpleForm = () => {
             </LocalizationProvider>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
-                value={date}
+                value={createDate}
                 onChange={handleDateChange2}
                 renderInput={(props) => (
                   <TextField
-                    // {...props}
+                    {...props}
                     type="date"
                     label="Created At"
                     id="mui-pickers-date"
@@ -141,11 +130,11 @@ const SimpleForm = () => {
             </LocalizationProvider>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
-                value={date}
+                value={expiryDate}
                 onChange={handleDateChange3}
                 renderInput={(props) => (
                   <TextField
-                    // {...props}
+                    {...props}
                     type="date"
                     label="Expiry Date"
                     id="mui-pickers-date"
@@ -155,7 +144,10 @@ const SimpleForm = () => {
               />
             </LocalizationProvider>
 
+          </Grid>
+          <Grid item xs={12}  >
             <FormControlLabel
+              sx={{ mt: -10 }}
               control={<Checkbox />}
               label="I have read and agree to the terms of service."
             />
