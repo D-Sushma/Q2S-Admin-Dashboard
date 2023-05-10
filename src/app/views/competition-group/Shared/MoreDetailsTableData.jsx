@@ -185,15 +185,16 @@ export default function Tables() {
                         </Button>
                     </Box>
                 </Box>
+
+                <ThemeProvider theme={getMuiTheme()}>
+                    <MUIDataTable
+                        title={"MORE-DETAILS"}
+                        data={users}
+                        columns={columns}
+                        options={options}
+                    />
+                </ThemeProvider>
             </Container>
-            <ThemeProvider theme={getMuiTheme()}>
-                <MUIDataTable
-                    title={"MORE-DETAILS"}
-                    data={users}
-                    columns={columns}
-                    options={options}
-                />
-            </ThemeProvider>
         </>
     );
 }

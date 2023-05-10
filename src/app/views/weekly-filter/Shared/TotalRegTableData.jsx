@@ -137,15 +137,16 @@ export default function Tables() {
                         Go Back
                     </Button>
                 </Box>
+
+                <ThemeProvider theme={getMuiTheme()}>
+                    <MUIDataTable
+                        title={"MEMBER REGISTRATION"}
+                        data={state}
+                        columns={columns}
+                        options={options}
+                    />
+                </ThemeProvider>
             </Container>
-            <ThemeProvider theme={getMuiTheme()}>
-                <MUIDataTable
-                    title={"MEMBER REGISTRATION"}
-                    data={state}
-                    columns={columns}
-                    options={options}
-                />
-            </ThemeProvider>
         </>
     );
 }

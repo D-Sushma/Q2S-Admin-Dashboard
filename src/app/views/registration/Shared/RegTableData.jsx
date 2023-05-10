@@ -67,14 +67,14 @@ const columns = [
             sort: true,
         }
     },
-    {
-        name: "updated",
-        label: "UPDATED",
-        options: {
-            filter: true,
-            sort: true,
-        }
-    },
+    // {
+    //     name: "updated",
+    //     label: "UPDATED",
+    //     options: {
+    //         filter: true,
+    //         sort: true,
+    //     }
+    // },
     {
         name: "created",
         label: "CREATED",

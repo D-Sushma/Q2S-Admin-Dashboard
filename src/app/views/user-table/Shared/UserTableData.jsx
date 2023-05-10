@@ -12,7 +12,7 @@ const getMuiTheme = () => createTheme({
                     // innerHeight: "20px",
                     margin: 0,
                     padding: 5,
-                    textAlign: "center",
+                    // textAlign: "center",
                     '&:nth-child(2)': {
                         // width: 30,
                         height: "auto",

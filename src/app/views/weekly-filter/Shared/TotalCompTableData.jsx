@@ -170,15 +170,16 @@ export default function CompListTableData() {
                         Go Back
                     </Button>
                 </Box>
+
+                <ThemeProvider theme={getMuiTheme()}>
+                    <MUIDataTable
+                        title={"TOTAL COMPETITION"}
+                        columns={columns}
+                        data={state}
+                        options={Options}
+                    />
+                </ThemeProvider>
             </Container>
-            <ThemeProvider theme={getMuiTheme()}>
-                <MUIDataTable
-                    title={"TOTAL COMPETITION"}
-                    columns={columns}
-                    data={state}
-                    options={Options}
-                />
-            </ThemeProvider>
         </>
     )
 }

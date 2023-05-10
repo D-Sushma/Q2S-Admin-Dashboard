@@ -1,12 +1,10 @@
 import React from 'react';
 import { Box, Fab, Icon } from '@mui/material';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddNewReg from './AddNewReg';
-// import NewRegistration from './NewRegistration';
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -26,14 +24,11 @@ export default function FormDialog() {
       </Fab>
 
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-        <DialogActions>
-          <Button variant="outlined" color="error" onClick={handleClose} sx={{ mt: "-50px", mr: 2 }}>
-            X
-          </Button>
-          {/* <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button> */}
+        <DialogTitle id="form-dialog-title">Add New Registration</DialogTitle>
+        <DialogActions >
+          <Fab size="small" sx={{ mt: "-80px", mr: 2, backgroundColor: "white" }} onClick={handleClose} >
+            <Icon color='error'>close</Icon>
+          </Fab>
         </DialogActions>
         <DialogContent>
           <AddNewReg />

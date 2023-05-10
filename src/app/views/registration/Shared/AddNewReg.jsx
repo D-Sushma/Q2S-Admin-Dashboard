@@ -10,8 +10,11 @@ import {
   styled,
 } from "@mui/material";
 import { Span } from "app/components/Typography";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
+import SubjectInForm from './SubjectInForm';
+import SubscriptionInForm from './SubscriptionInForm';
+import StatusInForm from './StatusInForm';
 
 const TextField = styled(TextValidator)(() => ({
   width: "100%",
@@ -19,7 +22,7 @@ const TextField = styled(TextValidator)(() => ({
 }));
 
 const SimpleForm = () => {
-  const [state, setState] = useState({ updateDate: new Date() });
+  const [state, setState] = useState({ updateDate: new Date('mm/dd/yyyy') });
 
   const handleSubmit = (event) => {
     // console.log("submitted");
@@ -49,7 +52,7 @@ const SimpleForm = () => {
   return (
     <div>
       <ValidatorForm onSubmit={handleSubmit} onError={() => null}>
-        <Grid container spacing={6}>
+        <Grid container spacing={6} sx={{ mt: -10 }}>
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
             <TextField
               type="text"
@@ -60,7 +63,7 @@ const SimpleForm = () => {
               validators={["required"]}
               errorMessages={["First name is required"]}
             />
-            <TextField
+            {/* <TextField
               type="text"
               name="subject"
               label="Subject"
@@ -68,8 +71,9 @@ const SimpleForm = () => {
               value={subject || ""}
               validators={["required"]}
               errorMessages={["subject is required"]}
-            />
-            <TextField
+            /> */}
+            <SubjectInForm />
+            {/* <TextField
               type="text"
               name="subscription"
               label="Subscription"
@@ -77,8 +81,9 @@ const SimpleForm = () => {
               value={subscription || ""}
               validators={["required"]}
               errorMessages={["this field is required"]}
-            />
-            <TextField
+            /> */}
+
+            {/* <TextField
               type="text"
               name="status"
               label="Status"
@@ -86,7 +91,8 @@ const SimpleForm = () => {
               value={status || ""}
               validators={["required"]}
               errorMessages={["this field is required"]}
-            />
+            /> */}
+            <StatusInForm />
           </Grid>
 
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
@@ -99,7 +105,9 @@ const SimpleForm = () => {
               validators={["required"]}
               errorMessages={["Last name is required"]}
             />
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <SubscriptionInForm />
+
+            {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
                 value={updateDate}
                 onChange={handleDateChange}
@@ -112,9 +120,10 @@ const SimpleForm = () => {
                   />
                 )}
               />
-            </LocalizationProvider>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            </LocalizationProvider> */}
+            {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
+                disabled
                 value={createDate}
                 onChange={handleDateChange2}
                 renderInput={(props) => (
@@ -127,8 +136,8 @@ const SimpleForm = () => {
                   />
                 )}
               />
-            </LocalizationProvider>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            </LocalizationProvider> */}
+            {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
                 value={expiryDate}
                 onChange={handleDateChange3}
@@ -142,19 +151,12 @@ const SimpleForm = () => {
                   />
                 )}
               />
-            </LocalizationProvider>
+            </LocalizationProvider> */}
 
-          </Grid>
-          <Grid item xs={12}  >
-            <FormControlLabel
-              sx={{ mt: -10 }}
-              control={<Checkbox />}
-              label="I have read and agree to the terms of service."
-            />
           </Grid>
         </Grid>
 
-        <Button color="primary" variant="contained" type="submit">
+        <Button color="primary" variant="contained" type="submit" sx={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
           <Icon>send</Icon>
           <Span sx={{ pl: 1, textTransform: "capitalize" }}>Submit</Span>
         </Button>
