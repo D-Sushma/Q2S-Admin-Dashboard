@@ -15,22 +15,22 @@ const AutoComplete = styled(Autocomplete)(() => ({
 }));
 
 const nameOption = [
-  { label: 'Afghanistan', value: 103 },
-  { label: 'Aland Islands', value: 104 },
-  { label: 'Albania', value: 105 },
-  { label: 'Algeria', value: 106 },
-  { label: 'American Samoa', value: 107 },
-  { label: 'Andorra', value: 108 },
-  { label: 'Angola', value: 109 },
+  { label: 'Afghanistan' },
+  { label: 'Aland Islands' },
+  { label: 'Albania' },
+  { label: 'Algeria' },
+  { label: 'American Samoa' },
+  { label: 'Andorra' },
+  { label: 'Angola' },
 ];
 const subjectOption = [
   { label: '' },
-  { label: 'GK', value: 13 },
-  { label: 'English', value: 6 },
+  { label: 'GK' },
+  { label: 'English' },
 ];
 
 const subscriptionOption = [
-  { label: 'Weekly', value: 1 },
+  { label: 'Weekly' },
 ];
 
 const TextBox = styled(TextValidator)(() => ({
@@ -41,52 +41,15 @@ const TextBox = styled(TextValidator)(() => ({
 const AddNewReg = () => {
   const [state, setState] = useState({});
   const [userSubject, setUserSubject] = React.useState('');
-  // ----------DB FETCH------------------------------
-  let userOption = [];
-  let userData = [];
-  const fetchData = () => {
-    fetch('http://localhost:4000/usertabledetails')
-      .then((response) => {
-        console.log('response');
-        return response.json();
-      })
-      .then((data) => {
-        console.log("users data", data);
-        userData = data.response.results;
-        // console.log('userData', userData);
-        for (let i = 0; i < userData.length; i++) {
-          const userId = userData[i].id;
-          const name = userData[i].name;
-          const lname = userData[i].lname;
-          const userName = name + " " + lname;
-          // console.log('userId,userName', userId, userName)
-          userOption.push({
-            label: userName,
-            value: userId,
-          })
-        }
-        console.log('userOption', userOption)
-      });
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-  // ----------DB FETCH END-------------------------
 
   const fetchSubmitData = async () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    // console.log('userName', userName)
-    // console.log('userSubject', userSubject)
-    // console.log('userSubscription', userSubscription)
     var raw = JSON.stringify({
-      "userid": userName,
-      "subject": userSubject,
-      "subscription": userSubscription,
-      // "userid": 103,
-      // "subject": 13,
-      // "subscription": 1,
+      "userid": 103,
+      "subject": 13,
+      "subscription": 1,
       "status": 0,
       "updated_at": "2023/05/11",
       "created_at": "2023/05/11",
@@ -100,29 +63,29 @@ const AddNewReg = () => {
       redirect: 'follow'
     };
 
-    await fetch("http://localhost:4000/insert/registration", requestOptions)
-      .then((response) => response.json())
+    fetch("http://localhost:4000/insert/registration", requestOptions)
+      .then((response) => response.text())
       .then((data) => console.log('data', data))
       .catch(error => console.log('error', error));
   };
   useEffect(() => {
-    // fetchSubmitData();
+    fetchSubmitData();
   }, []);
 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("submitted");
-    console.log("userName", userName);
+    console.log("submitted");
+    console.log(userName);
     // console.log(subject);
-    console.log("userSubscription", userSubscription);
-    console.log("userSubject", userSubject)
+    console.log(userSubscription);
+    console.log(userSubject)
     // console.log(event);
   };
 
   const handleUserSubject = (event) => {
     setUserSubject(event.target.value);
-    // console.log('userSubject', userSubject)
+    console.log('userSubject', userSubject)
   };
 
   // const handleChange = (event) => {
@@ -151,12 +114,11 @@ const AddNewReg = () => {
               validators={["required"]}
               errorMessages={["First name is required"]}
             /> */}
-
             <AutoComplete
               onChange={(event, value) => {
-                setState({ ...state, userName: value.value });
+                setState({ ...state, userName: value.label });
               }}
-              options={userOption}
+              options={nameOption}
               getOptionLabel={(option) => option.label}
               renderInput={(params) => (
                 <TextField {...params} label="Name" variant="outlined" fullWidth />
@@ -172,7 +134,7 @@ const AddNewReg = () => {
                 onChange={handleUserSubject}
               >
                 {subjectOption.map((ele) => (
-                  <MenuItem value={ele.value} >{ele.label}</MenuItem>
+                  <MenuItem value={ele.label} >{ele.label}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -195,7 +157,7 @@ const AddNewReg = () => {
           <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
             <AutoComplete
               onChange={(event, value) => {
-                setState({ ...state, userSubscription: value.value });
+                setState({ ...state, userSubscription: value.label });
               }}
               options={subscriptionOption}
               getOptionLabel={(option) => option.label}
