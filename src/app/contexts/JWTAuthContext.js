@@ -82,15 +82,59 @@ const AuthContext = createContext({
 
 export const AuthProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
-
+    // async function LoginUser(email, password) {
+    // const FCMToken = await getData('FCMToken');
+    //    var myHeaders = new Headers();
+    //    myHeaders.append('Cookie', 'PHPSESSID=4b3d477397c34740a14ee218ca78f631');
+    //     return fetch('http://localhost:4000/login', {
+    //         method: 'POST',
+    //         header: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(email, password)
+    //     }).then(data => data.json())
+    // }
     const login = async (email, password) => {
-        const response = await axios.post('/api/auth/login', {
+        // let user = [];
+        // let acccessToken = [];
+        // const response = await axios.post('/api/auth/login', {
+        const response = await axios.post('http://localhost:4000/login', {
             email,
             password,
-        })
-        const { accessToken, user } = response.data
 
+        })
+        console.log('response.data', response.data.response[0]?.fcm_key)
+        // cJFXyJH9TuGczQH2Q22mn8:APA91bF8eTEFCo2TNL4ZD7nDmHZ7uPl20FZQPhJ3QL_qWP2kaOVsos5FO83I9qTjOlKVt6KrmlB6S9lqh3F2MShTQHeEZi-kt8nKUQa8G6DWuwAhQRT-gogWki53BTdHsqonvrAWNCem
+        // .then((response) => {
+        //     let responseData;
+        //     // console.log('response.data', response.data);
+        //     responseData = response.data.response;
+        //     for (let i = 0; i < responseData.length; i++) {
+        //         const email = responseData[i].email;
+        //         const pass = responseData[i].pass;
+        //         const fcm_key = responseData[i].fcm_key;
+
+        //         user.push({
+        //             email: email,
+        //             password: pass,
+        //         })
+        //         acccessToken.push({
+        //             fcm_key: fcm_key,
+        //         })
+        //     }
+        //     console.log('user', user)
+        //     console.log('accessToken', accessToken)
+        //     const { user } = user
+        //     const { accessToken } = accessToken
+        //     setSession(accessToken)
+
+        // }).catch(() => {
+        //     console.log("Invalid Credentials");
+        // })
+        // fcm_key
+        const { accessToken, user } = response.data
         setSession(accessToken)
+
 
         dispatch({
             type: 'LOGIN',
