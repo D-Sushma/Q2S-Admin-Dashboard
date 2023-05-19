@@ -85,14 +85,14 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
         // const response = await axios.post('/api/auth/login', {
         try {
-            const response = await axios.post('http://localhost:4000/login', {
+            const response = await axios.post('http://localhost:4000/admin/login', {
                 email,
                 password,
             })
             console.log('response.data user', response.data.response[0])
-            console.log('response.data token', response.data.response[0]?.fcm_key)
+            console.log('response.data token', response.data.response[0]?.key_token)
             const user = response.data.response[0];
-            const accessToken = response.data.response[0]?.fcm_key;
+            const accessToken = response.data.response[0]?.key_token;
             // const { accessToken, user } = response.data
             setSession(accessToken)
 

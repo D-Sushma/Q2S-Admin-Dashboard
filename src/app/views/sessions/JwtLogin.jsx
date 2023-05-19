@@ -37,15 +37,15 @@ const JWTRoot = styled(JustifyBox)(() => ({
 const initialValues = {
   // email: 'jason@ui-lib.com',
   // password: 'dummyPass',
-  email: 'prabir.d06@gmail.com',
-  password: 'Prabir@1986',
+  email: 'admin@smartscoreanalytics.com',
+  password: 'smartscore321#',
   remember: true,
 };
 
 // form field validation schema
 const validationSchema = Yup.object().shape({
   password: Yup.string()
-    .min(6, 'Password must be 6 character length').max(12, 'Password must be 6 character length')
+    .min(6, 'Password must be 6 character length').max(20, 'Password must be 6 character length')
     .required('Password is required!'),
   email: Yup.string().email('Invalid Email address').required('Email is required!'),
 });
@@ -148,7 +148,7 @@ const JwtLogin = () => {
                       Login
                     </LoadingButton>
 
-                    <Paragraph>
+                    {/* <Paragraph>
                       Don't have an account?
                       <NavLink
                         to="/session/signup"
@@ -156,7 +156,7 @@ const JwtLogin = () => {
                       >
                         Register
                       </NavLink>
-                    </Paragraph>
+                    </Paragraph> */}
                   </form>
                 )}
               </Formik>
