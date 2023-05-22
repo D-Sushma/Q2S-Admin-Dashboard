@@ -1,6 +1,5 @@
 import { Box, Card, Grid, Icon, IconButton, styled, Tooltip } from '@mui/material';
 import { Small } from 'app/components/Typography';
-import { useNavigate } from 'react-router-dom';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -36,46 +35,28 @@ const StatCards = () => {
     { name: 'Orders to deliver', amount: '305 Orders', icon: 'shopping_cart' },
   ];
 
-  const navigate = useNavigate();
   return (
     <Grid container spacing={3} sx={{ mb: '24px' }}>
-      {/* {cardList.map((item, index) => ( */}
-      <Grid item xs={12} md={6} >
-        <StyledCard elevation={6}>
-          <ContentBox>
-            <Icon className="icon">group</Icon>
-            <Box ml="12px">
-              <Small>Registration</Small>
-              <Heading>80</Heading>
-            </Box>
-          </ContentBox>
+      {cardList.map((item, index) => (
+        <Grid item xs={12} md={6} key={index}>
+          <StyledCard elevation={6}>
+            <ContentBox>
+              <Icon className="icon">{item.icon}</Icon>
+              <Box ml="12px">
+                <Small>{item.name}</Small>
+                <Heading>{item.amount}</Heading>
+              </Box>
+            </ContentBox>
 
-          <Tooltip title="View Details" placement="top">
-            <IconButton onClick={() => navigate('/registration/MemberRegistration')}>
-              <Icon>arrow_right_alt</Icon>
-            </IconButton>
-          </Tooltip>
-        </StyledCard>
-      </Grid>
-      <Grid item xs={12} md={6} >
-        <StyledCard elevation={6}>
-          <ContentBox>
-            <Icon className="icon">contacts</Icon>
-            <Box ml="12px">
-              <Small>Competition</Small>
-              <Heading>75</Heading>
-            </Box>
-          </ContentBox>
-
-          <Tooltip title="View Details" placement="top">
-            <IconButton onClick={() => navigate('/competition-list/CompetitionList')}>
-              <Icon>arrow_right_alt</Icon>
-            </IconButton>
-          </Tooltip>
-        </StyledCard>
-      </Grid>
-      {/* ))} */}
-    </Grid >
+            <Tooltip title="View Details" placement="top">
+              <IconButton>
+                <Icon>arrow_right_alt</Icon>
+              </IconButton>
+            </Tooltip>
+          </StyledCard>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 

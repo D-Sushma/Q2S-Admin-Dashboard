@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }) => {
                 },
             })
         } catch (error) {
-            alert('error! Not Found');
+            console.error('error! Not Found', error);
         }
     }
 
