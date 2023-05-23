@@ -49,7 +49,7 @@ const StatCards2 = () => {
 
   return (
     <Grid container spacing={3} sx={{ mb: 3 }}>
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={12}>
         <Card elevation={3} sx={{ p: 2 }}>
           <ContentBox>
             <FabIcon size="medium" sx={{ background: 'rgba(9, 182, 109, 0.15)' }}>
@@ -68,7 +68,7 @@ const StatCards2 = () => {
         </Card>
       </Grid>
 
-      <Grid item xs={12} md={6}>
+      {/* <Grid item xs={12} md={12}>
         <Card elevation={3} sx={{ p: 2 }}>
           <ContentBox>
             <FabIcon size="medium" sx={{ background: bgError, overflow: 'hidden' }}>
@@ -85,7 +85,7 @@ const StatCards2 = () => {
             <Span textcolor={textError}>(+21%)</Span>
           </ContentBox>
         </Card>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

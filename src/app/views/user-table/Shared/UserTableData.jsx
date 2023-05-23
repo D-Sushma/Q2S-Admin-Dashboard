@@ -109,7 +109,7 @@ export default function Tables() {
         <>
             <ThemeProvider theme={getMuiTheme()}>
                 <MUIDataTable
-                    title={"MEMBER REGISTRATION"}
+                    title={"USERS"}
                     data={users}
                     columns={columns}
                     options={options}
