@@ -1,4 +1,4 @@
-import { Card, Grid, styled, useTheme } from '@mui/material';
+import { Card, Grid, styled, useTheme, Box } from '@mui/material';
 import { Fragment } from 'react';
 import Campaigns from './shared/Campaigns';
 import DoughnutChart from './shared/Doughnut';
@@ -44,6 +44,12 @@ const Analytics = () => {
           <Grid item lg={12} md={8} sm={12} xs={12}>
             <StatCards />
           </Grid>
+        </Grid>
+
+        <Box >
+          <h3>Current Review</h3>
+        </Box>
+        <Grid container spacing={3}>
           <Grid item lg={8} md={8} sm={12} xs={12}>
             <StatCards2 />
           </Grid>

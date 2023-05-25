@@ -2,7 +2,6 @@ import React from "react"
 import MUIDataTable from "mui-datatables";
 import { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useParams } from 'react-router-dom';
 import { Breadcrumb } from "app/components";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, styled } from "@mui/material";
@@ -12,14 +11,17 @@ const getMuiTheme = () => createTheme({
         MUIDataTableBodyCell: {
             styleOverrides: {
                 root: {
+                    // border: 'solid 1px #000',
                     backgroundColor: "#f4f4f4",
                     // innerHeight: "20px",
                     margin: 0,
                     padding: 5,
-                    textAlign: "center",
-                    '&:nth-child(2)': {
+                    // textAlign: "center",
+                    '&:nth-child(8)': {
                         // width: 30,
                         height: "auto",
+                        // backgroundColor: 'red',
+                        // textAlign: 'center',
                     }
                 }
             }
@@ -31,127 +33,93 @@ const columns = [
     {
         name: "id",
         label: "SNO",
-        option: {
+        options: {
             filter: true,
             sort: true,
         }
     },
     {
-        name: "p1_name",
-        label: "PLAYER1(p1)",
-        option: {
+        name: "full_name",
+        label: "USER ID",
+        options: {
             filter: true,
-            sort: false,
+            sort: true,
         }
     },
     {
-        name: "p2_name",
-        label: "PLAYER2(p2)",
-        option: {
+        name: "subject",
+        label: "SUBJECT",
+        options: {
             filter: true,
-            sort: false,
+            sort: true,
         }
     },
+    // {
+    //     name: "subscription",
+    //     label: "SUBSCRIPTION",
+    //     options: {
+    //         filter: true,
+    //         sort: true,
+    //     }
+    // },
     {
-        name: "p1_correct_count",
-        label: "POINT P1",
-        option: {
+        name: "status",
+        label: "STATUS",
+        options: {
             filter: true,
-            sort: false,
+            sort: true,
         }
     },
+    // {
+    //     name: "created_at",
+    //     // name: "created",
+    //     label: "CREATED",
+    //     options: {
+    //         filter: true,
+    //         sort: true,
+    //     }
+    // },
     {
-        name: "p2_correct_count",
-        label: "POINT P2",
-        option: {
+        name: "expiry_date",
+        // name: "expiryDate",
+        label: "EXPIRY DATE",
+        options: {
             filter: true,
-            sort: false,
+            sort: true,
         }
     },
-    {
-        name: "p1_time_taken",
-        label: "P1 TIME",
-        option: {
-            filter: true,
-            sort: false,
-        }
-    },
-    {
-        name: "p1_time_taken",
-        label: "P2 TIME",
-        option: {
-            filter: true,
-            sort: false,
-        }
-    },
-    {
-        name: "winner_id",
-        label: "WINNER",
-        option: {
-            filter: true,
-            sort: false,
-        }
-    },
-    {
-        name: "slot_start",
-        label: "SLOT START",
-        option: {
-            filter: true,
-            sort: false,
-        }
-    },
-    {
-        name: "slot_end",
-        label: "SLOT END",
-        option: {
-            filter: true,
-            sort: false,
-        }
-    },
-    {
-        name: "is_walk_over",
-        label: "WALK OVER",
-        option: {
-            filter: true,
-            sort: false,
-        }
-    },
-]
+];
 
 const options = {
     filterType: "multiselect",
     rowsPerPage: [5],
     rowsPerPageOptions: [10, 25, 50, 100],
     jumpToPage: true,
-    selectableRows: false
+    selectableRows: false,
     // ** Other Some Options...
     // filterType: "checkbox, textField, dropdown",
     // filter: true,
     // responsive: 'stacked',
     // page: 2,
 };
-export default function Tables() {
-    // ===============Get id 
-    const params = useParams();
-    // console.log("params",params);
-    // --------------------FETCH DATA--------------------------
-    let [users, setUsers] = useState([]);
-    let fetchData = () => {
-        fetch(`http://localhost:4000/moredetailstable/${params.cgId}`)
+export default function ActiveUsers() {
+    // ----------DB FETCH------------------------------
+    const [currentReg, setCurrentReg] = useState([]);
+    const fetchCurrentRegistration = () => {
+        fetch('http://localhost:4000/current-week-registration')
             .then((response) => {
-                console.log('response');
                 return response.json();
             })
             .then((data) => {
-                console.log('inside data of more details table data', data);
-                setUsers(data.items);
+                console.log('Current Registration', data);
+                setCurrentReg(data.response.items);
+
             });
     };
-    console.log('after pagination table');
     useEffect(() => {
-        fetchData();
+        fetchCurrentRegistration();
     }, []);
-    // --------------------END FETCH DATA--------------------------
+    // ----------DB FETCH END-------------------------
     // -------------FOR BACK BUTTON--------------------
     const navigate = useNavigate();
 
@@ -170,7 +138,7 @@ export default function Tables() {
                 <Box className="breadcrumb" display="flex" justifyContent="space-between">
                     <Breadcrumb
                         routeSegments={[
-                            { name: 'More Details Table', path: ' ' },
+                            { name: 'Current Registration', path: '' },
                             { name: 'Table' },
                         ]}
                     />
@@ -188,8 +156,8 @@ export default function Tables() {
 
                 <ThemeProvider theme={getMuiTheme()}>
                     <MUIDataTable
-                        title={"MORE-DETAILS"}
-                        data={users}
+                        title={" ACTIVE USERS"}
+                        data={currentReg}
                         columns={columns}
                         options={options}
                     />
