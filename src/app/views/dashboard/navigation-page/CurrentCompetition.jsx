@@ -1,27 +1,24 @@
-import React from "react"
-import MUIDataTable from "mui-datatables";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import MUIDataTable from 'mui-datatables';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Breadcrumb } from "app/components";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, styled } from "@mui/material";
+
 
 const getMuiTheme = () => createTheme({
     components: {
         MUIDataTableBodyCell: {
             styleOverrides: {
                 root: {
-                    // border: 'solid 1px #000',
                     backgroundColor: "#f4f4f4",
                     // innerHeight: "20px",
                     margin: 0,
                     padding: 5,
-                    // textAlign: "center",
-                    '&:nth-child(8)': {
+                    textAlign: "center",
+                    '&:nth-child(2)': {
                         // width: 30,
                         height: "auto",
-                        // backgroundColor: 'red',
-                        // textAlign: 'center',
                     }
                 }
             }
@@ -29,97 +26,120 @@ const getMuiTheme = () => createTheme({
     },
 })
 
+
 const columns = [
     {
         name: "id",
         label: "SNO",
-        options: {
+        option: {
             filter: true,
             sort: true,
         }
     },
     {
-        name: "full_name",
-        label: "USER ID",
-        options: {
+        name: "competition_group_id",
+        label: "COMPETITION GROUP NAME",
+        option: {
             filter: true,
-            sort: true,
+            sort: false,
         }
     },
     {
-        name: "subject",
+        name: "subject_id",
         label: "SUBJECT",
-        options: {
+        option: {
             filter: true,
-            sort: true,
+            sort: false,
+        }
+    },
+    {
+        name: "p1_name",
+        label: "PLAYER1",
+        option: {
+            filter: true,
+            sort: false,
+        }
+    },
+    {
+        name: "p2_name",
+        label: "PLAYER2",
+        option: {
+            filter: true,
+            sort: false,
+        }
+    },
+    {
+        name: "test_date",
+        label: "TEST-DATE",
+        option: {
+            filter: true,
+            sort: false,
         }
     },
     // {
     //     name: "subscription",
     //     label: "SUBSCRIPTION",
-    //     options: {
+    //     option: {
     //         filter: true,
-    //         sort: true,
+    //         sort: false,
     //     }
     // },
     {
-        name: "status",
-        label: "STATUS",
-        options: {
+        name: "slot_start",
+        label: "SLOT START",
+        option: {
             filter: true,
-            sort: true,
+            sort: false,
         }
     },
-    // {
-    //     name: "created_at",
-    //     // name: "created",
-    //     label: "CREATED",
-    //     options: {
-    //         filter: true,
-    //         sort: true,
-    //     }
-    // },
     {
-        name: "expiry_date",
-        // name: "expiryDate",
-        label: "EXPIRY DATE",
-        options: {
+        name: "slot_end",
+        label: "SLOT END",
+        option: {
             filter: true,
-            sort: true,
+            sort: false,
         }
     },
-];
+]
 
-const options = {
+const Options = {
     filterType: "multiselect",
     rowsPerPage: [5],
-    rowsPerPageOptions: [10, 25, 50, 100],
+    rowsPerPageOptions: [10, 20, 50, 100],
     jumpToPage: true,
     selectableRows: false,
-    // ** Other Some Options...
-    // filterType: "checkbox, textField, dropdown",
-    // filter: true,
-    // responsive: 'stacked',
-    // page: 2,
-};
-export default function ActiveUsers() {
+    // textLabels: {
+    //     pagination: {
+    //         next: "Next >",
+    //         previous: "< Previous",
+    //         rowsPerPage: "Total items Per Page",
+    //         displayRows: "OF"
+    //     }
+    // },
+    // onChangePage(currentPage) {
+    //     console.log({ currentPage });
+    // },
+    // onChangeRowsPerPage(numberOfRows) {
+    //     console.log({ numberOfRows });
+    // }
+}
+export default function CurrentCompetition() {
     // ----------DB FETCH------------------------------
-    const [currentReg, setCurrentReg] = useState([]);
-    const fetchCurrentRegistration = () => {
-        fetch('http://localhost:4000/current-week-registration')
+    let [currentComp, setCurrentComp] = useState([]);
+    let fetchCurrentCompetition = () => {
+        fetch('http://localhost:4000/current-week-competetion')
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
-                console.log('Current Registration', data);
-                setCurrentReg(data.response.items);
-
-            });
+                console.log('Current Competition', data);
+                setCurrentComp(data.response.items);
+            })
     };
     useEffect(() => {
-        fetchCurrentRegistration();
-    }, []);
-    // ----------DB FETCH END-------------------------
+        fetchCurrentCompetition();
+    }, [])
+    // ----------DB FETCH END------------------------------
     // -------------FOR BACK BUTTON--------------------
     const navigate = useNavigate();
 
@@ -138,7 +158,7 @@ export default function ActiveUsers() {
                 <Box className="breadcrumb" display="flex" justifyContent="space-between">
                     <Breadcrumb
                         routeSegments={[
-                            { name: 'Current Registration', path: '' },
+                            { name: 'Current Competition', path: '' },
                             { name: 'Table' },
                         ]}
                     />
@@ -153,16 +173,15 @@ export default function ActiveUsers() {
                         </Button>
                     </Box>
                 </Box>
-
                 <ThemeProvider theme={getMuiTheme()}>
                     <MUIDataTable
-                        title={" CURRENT REGISTRATION "}
-                        data={currentReg}
+                        title={"CURRENT COMPETITION"}
                         columns={columns}
-                        options={options}
+                        data={currentComp}
+                        options={Options}
                     />
                 </ThemeProvider>
             </Container>
         </>
-    );
+    )
 }

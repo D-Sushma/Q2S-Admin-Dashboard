@@ -58,6 +58,7 @@ const StatCards2 = () => {
   // ----------DB FETCH------------------------------
   const [activeUsers, setActiveUsers] = useState([]);
   const [currentReg, setCurrentReg] = useState([]);
+  const [currentComp, setCurrentComp] = useState([]);
   const fetchActiveUsers = () => {
     fetch('http://localhost:4000/current-week-active-user')
       .then((response) => {
@@ -81,9 +82,20 @@ const StatCards2 = () => {
 
       });
   };
+  let fetchCurrentCompetition = () => {
+    fetch('http://localhost:4000/current-week-competetion')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Current Competition', data);
+        setCurrentComp(data.response.items);
+      })
+  };
   useEffect(() => {
     fetchActiveUsers();
     fetchCurrentRegistration();
+    fetchCurrentCompetition();
   }, []);
   // ----------DB FETCH END-------------------------
 
@@ -137,9 +149,9 @@ const StatCards2 = () => {
             </ContentBox>
 
             <ContentBox sx={{ pt: 2 }}>
-              <H1>{activeUsers.length}</H1>
+              <H1>{currentComp.length}</H1>
               <Tooltip title="View Details" placement="top">
-                <IconButton onClick={() => navigate('/dashboard/navigation-page/ActiveUsers')}>
+                <IconButton onClick={() => navigate('/dashboard/navigation-page/CurrentCompetition')}>
                   <Icon>arrow_right_alt</Icon>
                 </IconButton>
               </Tooltip>

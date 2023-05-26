@@ -84,9 +84,14 @@ const StatCards = () => {
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <h3>Overview</h3>
         <div>
-          <Select size="small" defaultValue="this_week">
+          <Select size="small" defaultValue="all_record">
+            <MenuItem value="all_record"> All Record</MenuItem>
             <MenuItem value="this_week"> This Week</MenuItem>
             <MenuItem value="last_week"> Last Week</MenuItem>
+            <MenuItem value="last_week"> This Month</MenuItem>
+            <MenuItem value="last_week"> Last Month</MenuItem>
+            <MenuItem value="last_week"> Six Month</MenuItem>
+            <MenuItem value="last_week"> Last Year</MenuItem>
           </Select>
         </div>
       </Box>
@@ -112,7 +117,7 @@ const StatCards = () => {
           <StyledCard elevation={6}>
             <ContentBox>
               {/* <Icon className="icon">group</Icon> */}
-              <Icon className="icon">recent_actors</Icon>
+              <Icon className="icon">streetview</Icon>
               <Box ml="12px">
                 <Small sx={{ fontSize: 13 }}>Registration</Small>
                 <Heading>{regMember.length}</Heading>
