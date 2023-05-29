@@ -41,7 +41,7 @@ const Analytics = () => {
     <Fragment>
       <ContentBox className="analytics">
         <Grid container spacing={3}>
-          <Grid item lg={12} md={8} sm={12} xs={12}>
+          <Grid item lg={12} md={12} sm={12} xs={12}>
             <StatCards />
           </Grid>
         </Grid>
