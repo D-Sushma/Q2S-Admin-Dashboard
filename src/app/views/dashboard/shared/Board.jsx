@@ -10,8 +10,13 @@ export default function Board() {
     ]
     // ----------DB FETCH------------------------------
     const [leaderBoard, setLeaderBoard] = useState([]);
-    // const currentDate = moment().format("YYYY-MM-DD");
-    // console.log('currentDate', currentDate)
+    const currentDate = moment();
+    const m = currentDate.weekday("monday")
+    const mon = moment(m).format("YYYY-MM-DD")
+    console.log('mon', mon)
+    const date = moment(currentDate);
+    const dow = date.day();
+    console.log("dow", dow);
     let [monday, setMonday] = useState('')
     const fetchLeaderBoardData = () => {
         try {
@@ -34,11 +39,10 @@ export default function Board() {
             console.log('Leader Board raw', raw)
             fetch('http://localhost:4000/leaderboard', requestOptions)
                 .then((response) => {
-                    console.log(' JOIN response');
                     return response.json();
                 })
                 .then((data) => {
-                    console.log('Leader Board', data);
+                    // console.log('Leader Board', data);
                     setLeaderBoard(data.response);
                     // setMonday('')
 
@@ -62,9 +66,11 @@ export default function Board() {
     //   dates.push(currentDate.format('YYYY-MM-DD'));
     //   currentDate.add(1, 'day');
     // }
-    const onMonday = () => {
+
+    const getDayDetails = (day) => {
+        console.log('day', day)
         const currentDate = moment();
-        const m = currentDate.weekday(1)
+        const m = currentDate.weekday(day)
         const mon = moment(m).format("YYYY-MM-DD")
         setMonday(mon)
         fetchLeaderBoardData();
@@ -132,42 +138,49 @@ export default function Board() {
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 // key={i}
                                 // value={monday}
-                                onClick={onMonday}
+                                onClick={() => getDayDetails(1)}
+                                disabled={!1 < 1}
                             >
                                 {/* {ele} */}
                                 M
                             </Button>
                             {/* ))} */}
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
-                                onClick={onTuesday}
+                                onClick={() => getDayDetails(2)}
+                                disabled={!2 < 2}
                             >
                                 T
                             </Button>
-                            {/* <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
-                                onClick={onWednusday}
+                            <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
+                                onClick={() => getDayDetails(3)}
+                                disabled={dow < 3}
                             >
                                 W
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
-                                onClick={onThrusday}
+                                onClick={() => getDayDetails(4)}
+                                disabled={dow < 4}
                             >
                                 T
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
-                                onClick={onFriday}
+                                onClick={() => getDayDetails(5)}
+                                disabled={dow < 5}
                             >
                                 F
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
-                                onClick={onSaturday}
+                                onClick={() => getDayDetails(6)}
+                                disabled={dow < 6}
                             >
                                 S
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
-                                onClick={onSunday}
+                                onClick={() => getDayDetails(7)}
+                                disabled={dow < 7}
                             >
                                 S
-                            </Button> */}
+                            </Button>
                         </Box>
                         <Box sx={{ mt: 3 }}>
                             {leaderBoard.map((value, i) => (
