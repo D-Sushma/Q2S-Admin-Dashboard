@@ -10,14 +10,18 @@ export default function Board() {
     ]
     // ----------DB FETCH------------------------------
     const [leaderBoard, setLeaderBoard] = useState([]);
+    let [WeekendDate, setWeekendDate] = useState('')
+    const [weekDisabled, setWeekDisabled] = useState(false)
     const currentDate = moment();
-    const m = currentDate.weekday("monday")
+    const m = currentDate.weekday("WeekendDate")
     const mon = moment(m).format("YYYY-MM-DD")
     console.log('mon', mon)
     const date = moment(currentDate);
     const dow = date.day();
     console.log("dow", dow);
-    let [monday, setMonday] = useState('')
+    const isWeekend = new Date().getDay() === 0 || new Date().getDay() === 6;
+    console.log('isWeekend', isWeekend)
+
     const fetchLeaderBoardData = () => {
         try {
             var myHeaders = new Headers();
@@ -27,7 +31,7 @@ export default function Board() {
             var raw = JSON.stringify({
                 // "today": "2023-05-29"
                 // "today": currentDate,
-                "today": monday,
+                "today": WeekendDate,
             });
 
             var requestOptions = {
@@ -44,7 +48,7 @@ export default function Board() {
                 .then((data) => {
                     // console.log('Leader Board', data);
                     setLeaderBoard(data.response);
-                    // setMonday('')
+                    // setWeekendDate('')
 
                 });
         } catch (err) {
@@ -52,12 +56,8 @@ export default function Board() {
         }
     };
     useEffect(() => {
-        // const currentDate = moment();
-        // const m = currentDate.weekday(1)
-        // const mon = moment(m).format("YYYY-MM-DD")
-        // setMonday(mon)
-        // onMonday();
         // fetchLeaderBoardData();
+        getDisabled();
     }, []);
     // ----------DB FETCH END-------------------------
     // const currentDate = moment();
@@ -68,61 +68,32 @@ export default function Board() {
     // }
 
     const getDayDetails = (day) => {
-        console.log('day', day)
+        // console.log('day', day)
         const currentDate = moment();
-        const m = currentDate.weekday(day)
-        const mon = moment(m).format("YYYY-MM-DD")
-        setMonday(mon)
+        const d = currentDate.weekday(day)
+        const weekDay = moment(d).format("YYYY-MM-DD")
+        setWeekendDate(weekDay)
         fetchLeaderBoardData();
     }
-    const onTuesday = () => {
-        // const currentDate = moment();
-        // const t = currentDate.weekday(2)
-        // const tues = moment(t).format("YYYY-MM-DD")
-        const tues = "2023-05-26"
-        setMonday(tues);
-        // fetchLeaderBoardData();
+    const getDisabled = () => {
+        const previous = moment().subtract(1, 'day');
+        const yesterday = moment(previous).format("YYYY-MM-DD")
+        setWeekDisabled(true)
     }
-    // const onWednusday = () => {
+    // const yesterday = moment().subtract(1, 'day');
+    // const disablePastDt = current => {
+    //     return current.isAfter(yesterday);
+    // };
+
+    // const onTuesday = () => {
     //     // const currentDate = moment();
-    //     // const w = currentDate.weekday(3)
-    //     // const wed = moment(t).format("YYYY-MM-DD")
-    //     const wed = "2023-05-26"
-    //     setMonday(wed);
-    //     fetchLeaderBoardData();
+    //     // const t = currentDate.weekday(2)
+    //     // const tues = moment(t).format("YYYY-MM-DD")
+    //     const tues = "2023-05-26"
+    //     setWeekendDate(tues);
+    //     // fetchLeaderBoardData();
     // }
-    // const onThrusday = () => {
-    //     // const currentDate = moment();
-    //     // const t = currentDate.weekday(3)
-    //     // const thurs = moment(t).format("YYYY-MM-DD")
-    //     const thurs = "2023-05-26"
-    //     setMonday(thurs);
-    //     fetchLeaderBoardData();
-    // }
-    // const onFriday = () => {
-    //     // const currentDate = moment();
-    //     // const f = currentDate.weekday(3)
-    //     // const fri = moment(t).format("YYYY-MM-DD")
-    //     const fri = "2023-05-26"
-    //     setMonday(fri);
-    //     fetchLeaderBoardData();
-    // }
-    // const onSaturday = () => {
-    //     // const currentDate = moment();
-    //     // const s = currentDate.weekday(3)
-    //     // const sat = moment(t).format("YYYY-MM-DD")
-    //     const sat = "2023-05-26"
-    //     setMonday(sat);
-    //     fetchLeaderBoardData();
-    // }
-    // const onSunday = () => {
-    //     // const currentDate = moment();
-    //     // const s = currentDate.weekday(3)
-    //     // const sun = moment(t).format("YYYY-MM-DD")
-    //     const sun = "2023-05-26"
-    //     setMonday(sun);
-    //     fetchLeaderBoardData();
-    // }
+
     return (
         <>
             <div className="board">
@@ -134,50 +105,56 @@ export default function Board() {
                             <Button color="primary" variant='outlined' sx={{ ml: 1, p: 0 }}>English</Button>
                         </Box>
                         <Box sx={{ display: "flex", justifyContent: "center", mt: 2, width: "100%" }} >
-                            {/* {weekend.map((ele, i) => ( */}
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
-                                // key={i}
-                                // value={monday}
                                 onClick={() => getDayDetails(1)}
-                                disabled={!1 < 1}
+                                // disabled={(dow === 1) || isWeekend}
+                                // disabled={(dow === 1) && (dow <= 7)}
+                                // disabled={disableFutureDt}
+                                disabled={(dow >= 1) || (dow <= 7)}
                             >
-                                {/* {ele} */}
                                 M
                             </Button>
-                            {/* ))} */}
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(2)}
-                                disabled={!2 < 2}
+                                // disabled={(dow === 2) || !isWeekend}
+                                // disabled={(dow === 2) && (dow <= 7)}
+                                // disabled={disableFutureDt}
+                                disabled={(dow >= 2) || (dow <= 7)}
                             >
                                 T
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(3)}
-                                disabled={dow < 3}
+                            // disabled={dow === 3 || !isWeekend}
+                            // disabled={(dow === 3) && (dow <= 7)}
                             >
                                 W
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(4)}
-                                disabled={dow < 4}
+                            // disabled={dow < 4}
+                            // disabled={(dow === 4) && (dow <= 7)}
                             >
                                 T
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(5)}
-                                disabled={dow < 5}
+                            // disabled={dow < 5}
+                            // disabled={(dow === 5) && (dow <= 7)}
                             >
                                 F
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(6)}
-                                disabled={dow < 6}
+                            // disabled={dow < 6}
+                            // disabled={(dow === 6) && (dow <= 7)}
                             >
                                 S
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(7)}
-                                disabled={dow < 7}
+                            // disabled={dow < 7}
+                            // disabled={(dow === 7) && (dow <= 7)}
                             >
                                 S
                             </Button>
