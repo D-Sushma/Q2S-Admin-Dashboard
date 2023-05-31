@@ -9,14 +9,7 @@ export default function Board() {
     const [leaderBoard, setLeaderBoard] = useState([]);
     let [WeekendDate, setWeekendDate] = useState('')
     const [active, setActive] = useState();
-    const [showDetails, setShowDetails] = useState(false);
-    const currentDate = moment();
-    // const m = currentDate.weekday("WeekendDate")
-    // const mon = moment(m).format("YYYY-MM-DD")
-    // console.log('mon', mon)
-    const date = moment(currentDate);
-    const dow = date.day();
-    console.log("dow", dow);
+    const [dow, setDow] = useState('')
 
     const fetchLeaderBoardData = () => {
         try {
@@ -51,14 +44,23 @@ export default function Board() {
         }
     };
 
+    // useEffect(() => {
+    //     console.log('pev dow', dow)
+    //     getDayDetails(dow - 1);
+    // }, [dow]);
+
     useEffect(() => {
-        // fetchLeaderBoardData();
+        const currentDate = moment();
+        const date = moment(currentDate);
+        setDow(date.day())
+        getDayDetails(date.day() - 1);
     }, []);
     // ----------DB FETCH END------------------------
+
     const getDayDetails = (day) => {
         const currentDate = moment();
-        const d = currentDate.weekday(day)
-        const weekDay = moment(d).format("YYYY-MM-DD")
+        const date = currentDate.weekday(day)
+        const weekDay = moment(date).format("YYYY-MM-DD")
         setWeekendDate(weekDay)
         setActive(day);
         fetchLeaderBoardData();
