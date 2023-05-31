@@ -96,7 +96,7 @@ const columns = [
 const options = {
     filterType: "multiselect",
     rowsPerPage: [5],
-    rowsPerPageOptions: [10, 25, 50, 100],
+    rowsPerPageOptions: [5, 10, 25, 50, 100],
     jumpToPage: true,
     selectableRows: false,
     // ** Other Some Options...
@@ -111,7 +111,7 @@ export default function Tables() {
     const fetchJoinData = () => {
         fetch('http://localhost:4000/join')
             .then((response) => {
-                console.log(' JOIN response');
+                // console.log(' JOIN response');
                 return response.json();
             })
             .then((data) => {

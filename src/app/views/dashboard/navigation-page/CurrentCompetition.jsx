@@ -132,7 +132,7 @@ export default function CurrentCompetition() {
                 return response.json();
             })
             .then((data) => {
-                console.log('Current Competition', data);
+                // console.log('Current Competition', data);
                 setCurrentComp(data.response.items);
             })
     };

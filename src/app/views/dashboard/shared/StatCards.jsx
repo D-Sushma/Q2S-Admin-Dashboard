@@ -39,11 +39,11 @@ const StatCards = () => {
   const fetchRegData = () => {
     fetch('http://localhost:4000/join')
       .then((response) => {
-        console.log(' JOIN response');
+        // console.log(' JOIN response');
         return response.json();
       })
       .then((data) => {
-        console.log('inside JOIN data inside TableData', data);
+        // console.log('inside JOIN data inside TableData', data);
         setRegMember(data.response.items);
 
       });
@@ -55,7 +55,7 @@ const StatCards = () => {
         return response.json();
       })
       .then((data) => {
-        console.log('data', data);
+        // console.log('data', data);
         setCompMember(data.response.items);
       })
   };
@@ -63,11 +63,11 @@ const StatCards = () => {
   const fetchUserData = () => {
     fetch('http://localhost:4000/usertabledetails')
       .then((response) => {
-        console.log('response');
+        // console.log('response');
         return response.json();
       })
       .then((data) => {
-        console.log("inside data", data);
+        // console.log("inside data", data);
         setUsers(data.response.items);
       });
   };

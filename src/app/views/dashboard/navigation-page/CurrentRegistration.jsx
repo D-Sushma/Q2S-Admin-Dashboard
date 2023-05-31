@@ -111,7 +111,7 @@ export default function ActiveUsers() {
                 return response.json();
             })
             .then((data) => {
-                console.log('Current Registration', data);
+                // console.log('Current Registration', data);
                 setCurrentReg(data.response.items);
 
             });

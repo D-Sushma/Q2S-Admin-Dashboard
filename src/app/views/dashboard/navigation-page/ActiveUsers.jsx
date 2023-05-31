@@ -108,11 +108,10 @@ export default function ActiveUsers() {
     const fetchJoinData = () => {
         fetch('http://localhost:4000/current-week-active-user')
             .then((response) => {
-                console.log(' JOIN response');
                 return response.json();
             })
             .then((data) => {
-                console.log('Active Users', data);
+                // console.log('Active Users', data);
                 setActiveUsers(data.response.items);
 
             });

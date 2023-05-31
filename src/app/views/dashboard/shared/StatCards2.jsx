@@ -62,11 +62,11 @@ const StatCards2 = () => {
   const fetchActiveUsers = () => {
     fetch('http://localhost:4000/current-week-active-user')
       .then((response) => {
-        console.log(' JOIN response');
+        // console.log(' JOIN response');
         return response.json();
       })
       .then((data) => {
-        console.log('Active users', data);
+        // console.log('Active users', data);
         setActiveUsers(data.response.items);
 
       });
@@ -77,7 +77,7 @@ const StatCards2 = () => {
         return response.json();
       })
       .then((data) => {
-        console.log('Current Registration', data);
+        // console.log('Current Registration', data);
         setCurrentReg(data.response.items);
 
       });
@@ -88,7 +88,7 @@ const StatCards2 = () => {
         return response.json();
       })
       .then((data) => {
-        console.log('Current Competition', data);
+        // console.log('Current Competition', data);
         setCurrentComp(data.response.items);
       })
   };
