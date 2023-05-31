@@ -76,9 +76,11 @@ export default function Board() {
         fetchLeaderBoardData();
     }
     const getDisabled = () => {
+        const todayDate = moment().format("YYYY-MM-DD")
         const previous = moment().subtract(1, 'day');
         const yesterday = moment(previous).format("YYYY-MM-DD")
-        setWeekDisabled(true)
+        const resultDate = yesterday <= todayDate
+        setWeekDisabled(resultDate)
     }
     // const yesterday = moment().subtract(1, 'day');
     // const disablePastDt = current => {
@@ -110,7 +112,9 @@ export default function Board() {
                                 // disabled={(dow === 1) || isWeekend}
                                 // disabled={(dow === 1) && (dow <= 7)}
                                 // disabled={disableFutureDt}
-                                disabled={(dow >= 1) || (dow <= 7)}
+                                // disabled={(dow >= 1) || (dow <= 7)}
+                                // disabled={(dow <= 1)}
+                                disabled={(weekDisabled === false) ? true : false}
                             >
                                 M
                             </Button>
@@ -119,42 +123,54 @@ export default function Board() {
                                 // disabled={(dow === 2) || !isWeekend}
                                 // disabled={(dow === 2) && (dow <= 7)}
                                 // disabled={disableFutureDt}
-                                disabled={(dow >= 2) || (dow <= 7)}
+                                // disabled={(dow >= 2) || (dow <= 7)}
+                                // disabled={(dow <= 2)}
+                                disabled={(weekDisabled === false) ? true : false}
                             >
                                 T
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(3)}
-                            // disabled={dow === 3 || !isWeekend}
-                            // disabled={(dow === 3) && (dow <= 7)}
+                                // disabled={dow === 3 || !isWeekend}
+                                // disabled={(dow === 3) && (dow <= 7)}
+                                // disabled={(dow <= 3)}
+                                disabled={(weekDisabled === false) ? true : false}
                             >
                                 W
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(4)}
-                            // disabled={dow < 4}
-                            // disabled={(dow === 4) && (dow <= 7)}
+                                // disabled={dow < 4}
+                                // disabled={(dow === 4) && (dow <= 7)}
+                                // disabled={(dow <= 4)}
+                                disabled={(weekDisabled === false) ? true : false}
                             >
                                 T
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(5)}
-                            // disabled={dow < 5}
-                            // disabled={(dow === 5) && (dow <= 7)}
+                                // disabled={dow < 5}
+                                // disabled={(dow === 5) && (dow <= 7)}
+                                // disabled={(dow <= 5)}
+                                disabled={(weekDisabled === false) ? true : false}
                             >
                                 F
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(6)}
-                            // disabled={dow < 6}
-                            // disabled={(dow === 6) && (dow <= 7)}
+                                // disabled={dow < 6}
+                                // disabled={(dow === 6) && (dow <= 7)}
+                                // disabled={(dow <= 6)}
+                                disabled={(weekDisabled === false) ? true : false}
                             >
                                 S
                             </Button>
                             <Button sx={{ color: "violet", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(7)}
-                            // disabled={dow < 7}
-                            // disabled={(dow === 7) && (dow <= 7)}
+                                // disabled={dow < 7}
+                                // disabled={(dow === 7) && (dow <= 7)}
+                                // disabled={(dow <= 7)}
+                                disabled={(weekDisabled === false) ? true : false}
                             >
                                 S
                             </Button>
