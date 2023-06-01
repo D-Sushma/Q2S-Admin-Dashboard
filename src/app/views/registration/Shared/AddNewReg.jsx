@@ -47,7 +47,7 @@ const AddNewReg = () => {
   const fetchData = () => {
     fetch('http://localhost:4000/usertabledetails')
       .then((response) => {
-        console.log('response');
+        // console.log('response');
         return response.json();
       })
       .then((data) => {
@@ -65,7 +65,7 @@ const AddNewReg = () => {
             value: userId,
           })
         }
-        console.log('userOption', userOption)
+        // console.log('userOption', userOption)
       });
   };
   useEffect(() => {
@@ -171,8 +171,8 @@ const AddNewReg = () => {
                 label="Subject"
                 onChange={handleUserSubject}
               >
-                {subjectOption.map((ele) => (
-                  <MenuItem value={ele.value} >{ele.label}</MenuItem>
+                {subjectOption.map((ele, i) => (
+                  <MenuItem key={i} value={ele.value} >{ele.label}</MenuItem>
                 ))}
               </Select>
             </FormControl>

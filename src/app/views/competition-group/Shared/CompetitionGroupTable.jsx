@@ -26,13 +26,13 @@ const StyledTable = styled(Table)(() => ({
 
 const PaginationTable = () => {
 
-  console.log('inside pagination table');
+  // console.log('inside pagination table');
   // ----------DB FETCH------------------------------
   let [users, setUsers] = useState([]);
   let fetchData = () => {
     fetch('http://localhost:4000/competitiongroupdetails')
       .then((response) => {
-        console.log('response');
+        // console.log('response' );
         return response.json();
       })
       .then((data) => {
@@ -40,7 +40,7 @@ const PaginationTable = () => {
         setUsers(data.response.results);
       })
   };
-  console.log('after pagination table');
+  // console.log('after pagination table');
   useEffect(() => {
     fetchData();
   }, []);
@@ -108,7 +108,8 @@ const PaginationTable = () => {
       </StyledTable >
 
       <TablePagination
-        text-44
+        // text-44 
+        text-44="true"
         page={page}
         component="div"
         rowsPerPage={rowsPerPage}

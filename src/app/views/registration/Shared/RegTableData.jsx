@@ -14,7 +14,9 @@ const getMuiTheme = () => createTheme({
                     margin: 0,
                     padding: 5,
                     // textAlign: "center",
-                    '&:nth-child(8)': {
+                    // '&:nth-child(8)': {   //it give error
+                    // ** solve by --> n-th-child(8) OR  nth-of-type(8)
+                    '&:n-th-child(8)': {
                         // width: 30,
                         height: "auto",
                         // backgroundColor: 'red',
@@ -98,7 +100,9 @@ const options = {
     rowsPerPage: [5],
     rowsPerPageOptions: [5, 10, 25, 50, 100],
     jumpToPage: true,
-    selectableRows: false,
+    // selectableRows: false,  // give error 
+    // solve by "single", "multiple", "none"
+    selectableRows: "none",
     // ** Other Some Options...
     // filterType: "checkbox, textField, dropdown",
     // filter: true,

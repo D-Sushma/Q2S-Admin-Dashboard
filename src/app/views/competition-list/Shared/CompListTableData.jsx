@@ -12,7 +12,7 @@ const getMuiTheme = () => createTheme({
                     margin: 0,
                     padding: 5,
                     textAlign: "center",
-                    '&:nth-child(2)': {
+                    '&:n-th-child(2)': {
                         // width: 30,
                         height: "auto",
                     }
@@ -101,9 +101,9 @@ const columns = [
 const Options = {
     filterType: "multiselect",
     rowsPerPage: [5],
-    rowsPerPageOptions: [10, 20, 50, 100],
+    rowsPerPageOptions: [5, 10, 20, 50, 100],
     jumpToPage: true,
-    selectableRows: false,
+    selectableRows: "none",
     // textLabels: {
     //     pagination: {
     //         next: "Next >",

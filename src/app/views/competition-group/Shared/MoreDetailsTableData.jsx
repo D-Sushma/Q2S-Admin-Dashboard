@@ -17,7 +17,7 @@ const getMuiTheme = () => createTheme({
                     margin: 0,
                     padding: 5,
                     textAlign: "center",
-                    '&:nth-child(2)': {
+                    '&:n-th-child(2)': {
                         // width: 30,
                         height: "auto",
                     }
@@ -121,9 +121,10 @@ const columns = [
 const options = {
     filterType: "multiselect",
     rowsPerPage: [5],
-    rowsPerPageOptions: [10, 25, 50, 100],
+    rowsPerPageOptions: [5, 10, 25, 50, 100],
     jumpToPage: true,
-    selectableRows: false
+    //**   selectableRows option--> "none", "single", "multiple"
+    selectableRows: 'none'
     // ** Other Some Options...
     // filterType: "checkbox, textField, dropdown",
     // filter: true,
@@ -139,7 +140,7 @@ export default function Tables() {
     let fetchData = () => {
         fetch(`http://localhost:4000/moredetailstable/${params.cgId}`)
             .then((response) => {
-                console.log('response');
+                // console.log('response');
                 return response.json();
             })
             .then((data) => {
@@ -147,7 +148,6 @@ export default function Tables() {
                 setUsers(data.items);
             });
     };
-    console.log('after pagination table');
     useEffect(() => {
         fetchData();
     }, []);
