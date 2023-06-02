@@ -61,6 +61,7 @@ export default function Board() {
         const date = moment(currentDate);
         setDow(date.day())
         getDayDetails(date.day() - 1);
+        getSubjectIdDetails();
     }, []);
     // ----------DB FETCH END------------------------
 
@@ -85,10 +86,10 @@ export default function Board() {
                     <CardContent>
                         <H2 sx={{ mb: 1, textAlign: "center" }}>Leader Board</H2>
                         <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }} >
-                            <Button color="primary" variant='outlined' sx={{ mr: 1, p: 0 }}
+                            <Button color="primary" variant={(subject === 13) ? "contained" : 'outlined'} sx={{ mr: 1, p: 0 }}
                                 onClick={() => getSubjectIdDetails(13)}
                             >GK</Button>
-                            <Button color="primary" variant='outlined' sx={{ ml: 1, p: 0 }}
+                            <Button color="primary" variant={(subject === 6) ? "contained" : 'outlined'} sx={{ ml: 1, p: 0 }}
                                 onClick={() => getSubjectIdDetails(6)}
                             >English</Button>
                         </Box>

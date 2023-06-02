@@ -12,7 +12,7 @@ import CompetitionGroupRoutes from './views/competition-group/CompetitionGroupRo
 import FilterRecordRoutes from './views/filter/FilterRecordRoutes';
 import UserTableRoute from './views/user-table/UserTableRoutes';
 import WeeklyRecordRoutes from './views/weekly-filter/WeeklyRecordRoutes';
-
+import QuizTestRoutes from './views/quiz-test/QuizTestRoutes';
 
 
 const routes = [
@@ -23,7 +23,7 @@ const routes = [
         {/* <Registration /> */}
       </AuthGuard>
     ),
-    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...MemberRegistrationRoutes, ...CompetitionListRoutes, ...CompetitionGroupRoutes, ...FilterRecordRoutes, ...UserTableRoute, ...WeeklyRecordRoutes],
+    children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes, ...MemberRegistrationRoutes, ...CompetitionListRoutes, ...CompetitionGroupRoutes, ...FilterRecordRoutes, ...UserTableRoute, ...WeeklyRecordRoutes, ...QuizTestRoutes],
   },
   ...sessionRoutes,
   { path: '/', element: <Navigate to="dashboard/default" /> },

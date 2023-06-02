@@ -6,6 +6,7 @@ export const navigations = [
   { name: 'Weekly Record', path: '/weekly-filter/WeeklyRecord', icon: 'filter_frames' },
   { name: 'Filter Record', path: '/filter/FilterRecord', icon: 'filter_frames' },
   { name: 'User Table', path: '/user-table/UserTable', icon: 'grid_on' },
+  { name: 'Quiz Test', path: '/quiz-test/QuizTest', icon: 'forum' },
   { label: 'PAGES', type: 'label' },
   {
     name: 'Session/Auth',
