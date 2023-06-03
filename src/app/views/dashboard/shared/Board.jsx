@@ -61,7 +61,7 @@ export default function Board() {
         const date = moment(currentDate);
         setDow(date.day())
         getDayDetails(date.day() - 1);
-        getSubjectIdDetails();
+        getSubjectIdDetails(13);
     }, []);
     // ----------DB FETCH END------------------------
 
@@ -74,7 +74,7 @@ export default function Board() {
         setActive(day);
         fetchLeaderBoardData();
     }
-    console.log('subject', subject)
+    // console.log('subject', subject)
     const getSubjectIdDetails = (sub) => {
         console.log('sub', sub)
         setSubject(sub)
@@ -84,9 +84,10 @@ export default function Board() {
             <div className="board">
                 <Card>
                     <CardContent>
+                        {console.log('subject', subject)}
                         <H2 sx={{ mb: 1, textAlign: "center" }}>Leader Board</H2>
                         <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }} >
-                            <Button color="primary" variant={(subject === 13) ? "contained" : 'outlined'} sx={{ mr: 1, p: 0 }}
+                            <Button color="primary" variant={subject == 13 ? "contained" : 'outlined'} sx={{ mr: 1, p: 0 }}
                                 onClick={() => getSubjectIdDetails(13)}
                             >GK</Button>
                             <Button color="primary" variant={(subject === 6) ? "contained" : 'outlined'} sx={{ ml: 1, p: 0 }}
@@ -123,6 +124,7 @@ export default function Board() {
                                 disabled={(dow <= 5)}
                             >
                                 F
+                                {/* {alert("kjj")} */}
                             </Button>
                             <Button sx={{ color: active === 6 ? "violet" : "violet", border: active === 6 ? "1px solid violet" : "", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(6)}
