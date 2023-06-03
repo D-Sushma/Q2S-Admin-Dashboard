@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Autocomplete, styled, TextField, Box } from '@mui/material';
 
 const AutoComplete = styled(Autocomplete)(() => ({
@@ -42,12 +42,44 @@ const suggestions = [
   { label: 'British Indian Ocean Territory' },
   { label: 'Brunei Darussalam' },
 ];
-const subjects = [
-  { label: 'General Knowledge' },
-  { label: 'English' },
-];
+// const subjects = [
+//   { label: 'General Knowledge' },
+//   { label: 'English' },
+// ];
 
 const Dropdowns = () => {
+  // ----------DB FETCH------------------------------
+  const [subjects, setSubjects] = useState('');
+  const [topics, setTopics] = useState('');
+  const [subTopics, setSubTopics] = useState('');
+  const fetchSubjectId = () => {
+    fetch('http://localhost:4000/receive-subject-id')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Receive subject id', data);
+        setSubjects(data.response);
+
+      });
+  };
+
+  const fetchTopicId = () => {
+    fetch('http://localhost:4000/receive-id-details')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Receive Topics id', data);
+        setTopics(data.response.results2);
+        setSubTopics(data.response.results3)
+      });
+  };
+  useEffect(() => {
+    fetchSubjectId();
+    fetchTopicId();
+  }, []);
+  // ----------DB FETCH END-------------------------
 
   return (
     <Fragment>
@@ -59,7 +91,7 @@ const Dropdowns = () => {
             // id="disable-clearable"
             // disableClearable
             options={subjects}
-            getOptionLabel={(option) => option.label}
+            getOptionLabel={(option) => option.name}
             renderInput={(params) => (
               <TextField {...params} label="Subject" variant="outlined" fullWidth />
             )}
@@ -71,8 +103,8 @@ const Dropdowns = () => {
           <AutoComplete
             // id="disable-clearable"
             // disableClearable
-            options={suggestions}
-            getOptionLabel={(option) => option.label}
+            options={topics}
+            getOptionLabel={(option) => option.name}
             renderInput={(params) => (
               <TextField {...params} label="Topics" variant="outlined" fullWidth />
             )}
@@ -84,8 +116,8 @@ const Dropdowns = () => {
           <AutoComplete
             // id="disable-clearable"
             // disableClearable
-            options={suggestions}
-            getOptionLabel={(option) => option.label}
+            options={subTopics}
+            getOptionLabel={(option) => option.name}
             renderInput={(params) => (
               <TextField {...params} label="Sub Topics" variant="outlined" fullWidth />
             )}
