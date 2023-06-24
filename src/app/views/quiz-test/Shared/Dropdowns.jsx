@@ -52,8 +52,10 @@ const Dropdowns = () => {
   const [subjects, setSubjects] = useState('');
   const [topics, setTopics] = useState('');
   const [subTopics, setSubTopics] = useState('');
-  const fetchSubjectId = () => {
-    fetch('http://localhost:4000/receive-subject-id')
+  const [subtopicData, setSubtopicData] = useState('');
+  const fetchSubjectId = (value) => {
+    console.log('value', value)
+    fetch('http://localhost:4000/subjects')
       .then((response) => {
         return response.json();
       })
@@ -64,20 +66,67 @@ const Dropdowns = () => {
       });
   };
 
-  const fetchTopicId = () => {
-    fetch('http://localhost:4000/receive-id-details')
+  const fetchTopicId = (value) => {
+    console.log('value-----', value)
+    let t_list;
+    if (value === 'General Knowledge') {
+      t_list = 13;
+    }
+    else {
+      t_list = 6
+    }
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    var raw = JSON.stringify({
+      sid: t_list,
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    fetch('http://localhost:4000/topics-subtopics', requestOptions)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
         console.log('Receive Topics id', data);
-        setTopics(data.response.results2);
-        setSubTopics(data.response.results3)
+        setTopics(data.response.results);
+        setSubTopics(data.response.results2)
+      });
+  };
+  const fetchSubtopicId = () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    var raw = JSON.stringify({
+      sid: 32, //english
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    fetch('http://localhost:4000/topics/subtopics', requestOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Receive Topics id', data);
+        setSubtopicData(data.response.results);
       });
   };
   useEffect(() => {
     fetchSubjectId();
-    fetchTopicId();
+    // fetchTopicId();
+    fetchSubtopicId();
   }, []);
   // ----------DB FETCH END-------------------------
 
@@ -93,8 +142,9 @@ const Dropdowns = () => {
             options={subjects}
             getOptionLabel={(option) => option.name}
             renderInput={(params) => (
-              <TextField {...params} label="Subject" variant="outlined" fullWidth />
+              <TextField {...params} label="Subjects" placeholder="Type a subject" variant="outlined" fullWidth />
             )}
+            onInputChange={(event, value) => fetchSubjectId(value) || fetchTopicId(value)}
           />
         </Box>
 
@@ -108,6 +158,7 @@ const Dropdowns = () => {
             renderInput={(params) => (
               <TextField {...params} label="Topics" variant="outlined" fullWidth />
             )}
+            onInputChange={(event, value) => fetchTopicId(value)}
           />
         </Box>
 
