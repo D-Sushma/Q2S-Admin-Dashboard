@@ -11,17 +11,16 @@ const corsOptions = {
 };
 
 // IMPORT==============
-
-var con = require("./connections"); //step #1
-const { query } = require("express");
-const { connect } = require("./connections");
+const reg = require('./routes/registration')
+var con = require("./connections");
 
 //2. we are initializing the app using the express
 var app = express();
-// var jsonParser = bodyParser.json()
+app.use("/reg", reg);
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 // --------START----------------------------------------
 con.connect(function (err) {
   if (err) throw err;
@@ -623,7 +622,8 @@ app.post("/leaderboard", (req, res) => {
   })
 })
 
-app.get("/receive-subject-id", (req, res) => {
+// -------------------QUIZ-------------------------
+app.get("/subjects", (req, res) => {
   let query = "SELECT * FROM `project_catt` WHERE UNDER = 0";
   con.query(query, (err, results) => {
     if (err) throw err;
@@ -631,13 +631,13 @@ app.get("/receive-subject-id", (req, res) => {
     res.send(apiResponse(results));
   });
 });
-app.get("/receive-id-details", (req, res) => {
-  let query = "SELECT * FROM project_catt where id in (SELECT id from project_catt where under = 13)";
+app.post("/topics-subtopics", (req, res) => {
+  let sid = req.body.sid;
+  let query = `SELECT * FROM project_catt where id in (SELECT id from project_catt where under = '${sid}')`;
   const idArray = [];
-  const finalObj = {};
   con.query(query, (err, results) => {
     if (err) throw err;
-    console.log(results.length);
+    console.log("results.length", results.length);
     for (let i = 0; i < results.length; i++) {
       const idElement = results[i].id;
       const under = results[i].UNDER;
@@ -645,32 +645,79 @@ app.get("/receive-id-details", (req, res) => {
         idElement: idElement, under: under
       })
     }
-    // for(let i = 0; i < idArray.length; i++ ) {
-    //   Object.assign(finalObj, idArray[i]);
-    // }
     const topicArray = idArray.map((obj) => {
       return obj.idElement;
     })
+    console.log("topicArray", topicArray)
 
     const query2 = `SELECT id,name from project_catt where under IN (${topicArray})`;
     con.query(query2, (err, results2) => {
       if (err) throw err;
-      console.log(results2.length);
+      console.log("results2.length", results2.length);
 
       const subTopicArray = results2.map((obj) => {
         return obj.id;
       })
-      // console.log(subTopicArray)
+      console.log("subTopicArray", subTopicArray)
 
       const query3 = `SELECT id,name from project_catt where under IN (${subTopicArray})`;
       con.query(query3, (err, results3) => {
         if (err) throw err;
-        console.log(results3.length)
+        console.log("results3.length", results3.length)
         res.send(apiResponse({ results: results, results2: results2, results3: results3 }));
       })
     })
   });
 });
+app.post("/topics/subtopics", (req, res) => {
+  let tid = req.body.tid;
+  let query = `SELECT * FROM project_catt where id in (SELECT id from project_catt where under = '${tid}')`;
+  con.query(query, (err, results) => {
+    if (err) throw err;
+    console.log("results.length", results);
+    res.send(apiResponse({ results: results }));
+  });
+});
+// app.get("/receive-id-details", (req, res) => {
+//   let query = "SELECT * FROM project_catt where id in (SELECT id from project_catt where under = 13)";
+//   const idArray = [];
+//   const finalObj = {};
+//   con.query(query, (err, results) => {
+//     if (err) throw err;
+//     console.log(results.length);
+//     for (let i = 0; i < results.length; i++) {
+//       const idElement = results[i].id;
+//       const under = results[i].UNDER;
+//       idArray.push({
+//         idElement: idElement, under: under
+//       })
+//     }
+//     // for(let i = 0; i < idArray.length; i++ ) {
+//     //   Object.assign(finalObj, idArray[i]);
+//     // }
+//     const topicArray = idArray.map((obj) => {
+//       return obj.idElement;
+//     })
+
+//     const query2 = `SELECT id,name from project_catt where under IN (${topicArray})`;
+//     con.query(query2, (err, results2) => {
+//       if (err) throw err;
+//       console.log(results2.length);
+
+//       const subTopicArray = results2.map((obj) => {
+//         return obj.id;
+//       })
+//       // console.log(subTopicArray)
+
+//       const query3 = `SELECT id,name from project_catt where under IN (${subTopicArray})`;
+//       con.query(query3, (err, results3) => {
+//         if (err) throw err;
+//         console.log(results3.length)
+//         res.send(apiResponse({ results: results, results2: results2, results3: results3 }));
+//       })
+//     })
+//   });
+// });
 
 function apiResponse(results) {
   return JSON.stringify({ status: 200, error: null, response: results });

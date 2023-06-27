@@ -7,6 +7,8 @@ import moment from 'moment';
 export default function Board() {
     // ----------DB FETCH------------------------------
     const [leaderBoard, setLeaderBoard] = useState([]);
+    let [WeekendDate, setWeekendDate] = useState('');
+    const [subjectId, setSubjectId] = useState('');
     const [subject, setSubject] = useState('');
     const [active, setActive] = useState();
     const [dow, setDow] = useState('');
@@ -15,18 +17,18 @@ export default function Board() {
     // const date = moment(currentDate)
     // const dow = date.day()
     // console.log('dow1', dow)
-    const fetchLeaderBoardData = (today) => {
+    const fetchLeaderBoardData = async (today, startDate) => {
         try {
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
 
             var raw = JSON.stringify({
-                // "today": "2023-05-29"
+                "startDate": startDate,
                 "today": today,
                 "subId": subject,
             });
-
+            console.log('raw', raw)
             var requestOptions = {
                 method: 'POST',
                 headers: myHeaders,
@@ -34,42 +36,53 @@ export default function Board() {
                 redirect: 'follow'
             };
             // console.log('Leader Board raw', raw)
-            fetch('http://localhost:4000/leaderboard', requestOptions)
+            await fetch('http://localhost:4000/leaderboard', requestOptions)
                 .then((response) => {
                     return response.json();
                 })
                 .then((data) => {
-                    // console.log('Leader Board', data);
+                    console.log('Leader Board', data);
+                    data.response.sort((a, b) => b.score - a.score)
                     setLeaderBoard(data.response);
                 });
         } catch (err) {
             console.log('err', err)
         }
     };
-    // ----------DB FETCH END------------------------
+
     useEffect(() => {
-        console.log("calling 1----->")
+        console.log("calling.....")
         const currentDate = moment();
         setDow(currentDate.day())
     }, []);
+    // ----------DB FETCH END------------------------
     useEffect(() => {
-        console.log("calling 2----->", dow)
+        console.log("caling2..............", dow)
         getSubjectIdDetails(13);
     }, [dow]);
+
     useEffect(() => {
-        console.log("calling 3----->", subject)
+        console.log("calling3............", subject)
         getDayDetails(dow - 1);
     }, [subject]);
 
-    const getDayDetails = (day) => {
+    const getDayDetails = (day, isWeekly) => {
+        console.log('isWeekly', isWeekly)
         const currentDate = moment();
-        const date = currentDate.weekday(day)
-        const today = moment(date).format("YYYY-MM-DD") // date before today
+        let today = ''
+        let startDate = "";
+        if (isWeekly) {
+            startDate = moment(currentDate.weekday(1)).format("YYYY-MM-DD")
+            today = moment().format('YYYY-MM-DD');
+        } else {
+            const date = currentDate.weekday(day)
+            today = moment(date).format("YYYY-MM-DD")
+            startDate = today;
+        }
         setActive(day);
-        fetchLeaderBoardData(today);
+        fetchLeaderBoardData(today, startDate);
     }
     const getSubjectIdDetails = (sub) => {
-        console.log('sub', sub)
         setSubject(sub)
         console.log('subject', subject)
     }
@@ -80,13 +93,12 @@ export default function Board() {
                     <CardContent>
                         <H2 sx={{ mb: 1, textAlign: "center" }}>Leader Board</H2>
                         <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }} >
-                            <Button color="primary" variant={subject === 13 ? "contained" : 'outlined'} sx={{ mr: 1, p: 0 }}
+                            <Button color="primary" variant={subject == 13 ? "contained" : 'outlined'} sx={{ mr: 1, p: 0 }}
                                 onClick={() => getSubjectIdDetails(13)}
                             >GK</Button>
                             <Button color="primary" variant={(subject === 6) ? "contained" : 'outlined'} sx={{ ml: 1, p: 0 }}
                                 onClick={() => getSubjectIdDetails(6)}
                             >English</Button>
-
                         </Box>
                         <Box sx={{ display: "flex", justifyContent: "center", mt: 2, width: "100%" }} >
                             <Button sx={{ color: active === 1 ? "violet" : "violet", border: active === 1 ? "1px solid violet" : "", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
@@ -118,6 +130,7 @@ export default function Board() {
                                 disabled={(dow <= 5)}
                             >
                                 F
+                                {/* {alert("kjj")} */}
                             </Button>
                             <Button sx={{ color: active === 6 ? "violet" : "violet", border: active === 6 ? "1px solid violet" : "", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
                                 onClick={() => getDayDetails(6)}
@@ -134,17 +147,17 @@ export default function Board() {
                             </Button>
                         </Box>
                         <Box sx={{ mt: 3 }}>
-                            {leaderBoard.map((player, i) => (
+                            {leaderBoard.map((value, i) => (
                                 <>
-                                    <Box key={i} sx={{ display: "flex", justifyContent: "space-between", mt: 1.5, ml: 2, mr: 2 }} >
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", mt: 1.5, ml: 2, mr: 2 }} >
                                         <Box sx={{ display: "flex", alignItems: "center" }}>
                                             <div className="info">
-                                                <H4 className='name text-dark'>{player.full_name}</H4>
-                                                {/* <span>mumbai</span> */}
+                                                <H4 className='name text-dark'>{value.winner_id}</H4>
+                                                <span>mumbai</span>
                                             </div>
                                         </Box>
                                         <Box sx={{ display: "flex", alignItems: "center" }}>
-                                            <span>{player.score}</span>
+                                            <span>{value.score}</span>
                                         </Box>
                                     </Box>
                                     <Divider />

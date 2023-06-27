@@ -39,7 +39,7 @@ const CompetitionList = () => {
           </Button>
         </Box>
         <Box sx={{ mt: 1 }}>
-          <SimpleCard title="COMPETITION - GROUP">
+          <SimpleCard title="COMPETITION - GROUP (LEADER BOARD)">
             <CompetitionGroupTable />
           </SimpleCard>
         </Box>

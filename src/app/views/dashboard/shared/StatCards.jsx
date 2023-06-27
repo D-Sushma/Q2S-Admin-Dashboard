@@ -83,7 +83,7 @@ const StatCards = () => {
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <h3>Overview</h3>
-        <div>
+        {/* <div>
           <Select size="small" defaultValue="all_record">
             <MenuItem value="all_record"> All Record</MenuItem>
             <MenuItem value="this_week"> This Week</MenuItem>
@@ -93,10 +93,10 @@ const StatCards = () => {
             <MenuItem value="last_week"> Six Month</MenuItem>
             <MenuItem value="last_week"> Last Year</MenuItem>
           </Select>
-        </div>
+        </div> */}
       </Box>
       <Grid container spacing={3} sx={{ mb: '24px' }}>
-        <Grid item xs={12} md={3} >
+        <Grid item xs={12} md={4} >
           <StyledCard elevation={6}>
             <ContentBox>
               <Icon className="icon">person</Icon>
@@ -113,7 +113,7 @@ const StatCards = () => {
             </Tooltip>
           </StyledCard>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={4}>
           <StyledCard elevation={6}>
             <ContentBox>
               {/* <Icon className="icon">group</Icon> */}
@@ -131,7 +131,7 @@ const StatCards = () => {
             </Tooltip>
           </StyledCard>
         </Grid>
-        <Grid item xs={12} md={3} >
+        <Grid item xs={12} md={4} >
           <StyledCard elevation={6}>
             <ContentBox>
               <Icon className="icon">contacts</Icon>
@@ -148,7 +148,7 @@ const StatCards = () => {
             </Tooltip>
           </StyledCard>
         </Grid>
-        <Grid item xs={12} md={3} >
+        {/* <Grid item xs={12} md={4} >
           <StyledCard elevation={6}>
             <ContentBox>
               <Icon className="icon">contacts</Icon>
@@ -164,7 +164,7 @@ const StatCards = () => {
               </IconButton>
             </Tooltip>
           </StyledCard>
-        </Grid>
+        </Grid> */}
       </Grid >
     </>
   );

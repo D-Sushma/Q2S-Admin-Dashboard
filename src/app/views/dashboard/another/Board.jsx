@@ -7,6 +7,8 @@ import moment from 'moment';
 export default function Board() {
     // ----------DB FETCH------------------------------
     const [leaderBoard, setLeaderBoard] = useState([]);
+    let [WeekendDate, setWeekendDate] = useState('');
+    const [subjectId, setSubjectId] = useState('');
     const [subject, setSubject] = useState('');
     const [active, setActive] = useState();
     const [dow, setDow] = useState('');
@@ -41,30 +43,57 @@ export default function Board() {
                 .then((data) => {
                     // console.log('Leader Board', data);
                     setLeaderBoard(data.response);
+                    // setWeekendDate('')
+
                 });
         } catch (err) {
             console.log('err', err)
         }
     };
+
+    // useEffect(() => {
+    //     console.log('pev dow', dow)
+    //     getDayDetails(dow - 1);
+    // }, [dow]);
+
+    // **  FOLLOW BELOW THIS multiple useEffect----
+    // useEffect(() => {
+    //     const currentDate = moment();
+    //     const date = moment(currentDate);
+    //     setDow(date.day())
+    //     getDayDetails(date.day() - 1);
+    //     getSubjectIdDetails(13);
+    // }, []);
     // ----------DB FETCH END------------------------
     useEffect(() => {
         console.log("calling 1----->")
         const currentDate = moment();
         setDow(currentDate.day())
+        // getDayDetails(currentDate.day() - 1);
+        // getSubjectIdDetails(13);
     }, []);
     useEffect(() => {
         console.log("calling 2----->", dow)
+        // const currentDate = moment();
+        // setDow(currentDate.day())
+        // getDayDetails(currentDate.day() - 1);
         getSubjectIdDetails(13);
     }, [dow]);
     useEffect(() => {
         console.log("calling 3----->", subject)
+        // const currentDate = moment();
+        // setDow(currentDate.day())
         getDayDetails(dow - 1);
+        // getSubjectIdDetails(13);
     }, [subject]);
 
     const getDayDetails = (day) => {
         const currentDate = moment();
         const date = currentDate.weekday(day)
-        const today = moment(date).format("YYYY-MM-DD") // date before today
+        // const weekDay = moment(date).format("YYYY-MM-DD")
+        const today = moment(date).format("YYYY-MM-DD") //day before today
+        // setWeekendDate(weekDay)
+        // setSubjectId(subject)
         setActive(day);
         fetchLeaderBoardData(today);
     }
@@ -86,7 +115,6 @@ export default function Board() {
                             <Button color="primary" variant={(subject === 6) ? "contained" : 'outlined'} sx={{ ml: 1, p: 0 }}
                                 onClick={() => getSubjectIdDetails(6)}
                             >English</Button>
-
                         </Box>
                         <Box sx={{ display: "flex", justifyContent: "center", mt: 2, width: "100%" }} >
                             <Button sx={{ color: active === 1 ? "violet" : "violet", border: active === 1 ? "1px solid violet" : "", fontWeight: "bold", m: 1, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px' }}
@@ -134,17 +162,19 @@ export default function Board() {
                             </Button>
                         </Box>
                         <Box sx={{ mt: 3 }}>
-                            {leaderBoard.map((player, i) => (
+                            {leaderBoard.map((value, i) => (
                                 <>
-                                    <Box key={i} sx={{ display: "flex", justifyContent: "space-between", mt: 1.5, ml: 2, mr: 2 }} >
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", mt: 1.5, ml: 2, mr: 2 }} >
                                         <Box sx={{ display: "flex", alignItems: "center" }}>
+                                            <img src="" alt="" />
+
                                             <div className="info">
-                                                <H4 className='name text-dark'>{player.full_name}</H4>
-                                                {/* <span>mumbai</span> */}
+                                                <H4 className='name text-dark'>{value.winner_id}</H4>
+                                                <span>mumbai</span>
                                             </div>
                                         </Box>
                                         <Box sx={{ display: "flex", alignItems: "center" }}>
-                                            <span>{player.score}</span>
+                                            <span>{value.score}</span>
                                         </Box>
                                     </Box>
                                     <Divider />

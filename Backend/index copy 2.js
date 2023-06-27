@@ -599,11 +599,11 @@ app.get("/current-week-competetion", (req, res) => {
   });
 });
 app.post("/leaderboard", (req, res) => {
+  const startDate = req.body.startDate;
   const today = req.body.today;
   const subId = req.body.subId;
   console.log('today', today)
-  // let query = `SELECT *,CASE WHEN p1_correct_count > p2_correct_count THEN p1_correct_count ELSE p2_correct_count END AS score FROM competition_new_initiate WHERE test_date='${today}' AND is_completed = 1 AND subject_id ='${subId}'`;
-  let query = `SELECT c.*,CONCAT(q.name,' ',q.lname) AS full_name FROM (SELECT *,CASE WHEN p1_correct_count > p2_correct_count THEN p1_correct_count ELSE p2_correct_count END AS score FROM competition_new_initiate WHERE test_date='${today}' AND is_completed = 1 AND subject_id ='${subId}') AS c INNER JOIN quiz_regdetails AS q ON c.winner_id = q.id`;
+  let query = `SELECT *,CASE WHEN p1_correct_count > p2_correct_count THEN p1_correct_count ELSE p2_correct_count END AS score FROM competition_new_initiate WHERE test_date BETWEEN '${startDate}' AND '${today}' AND is_completed = 1 AND subject_id ='${subId}'`;
   console.log(query)
   con.query(query, (err, results) => {
     if (err) throw err;
