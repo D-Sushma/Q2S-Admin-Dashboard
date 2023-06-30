@@ -25,7 +25,7 @@ export default function FilterRecord() {
       <Container>
         <Box className="breadcrumb" display="flex" justifyContent="space-between">
           <Breadcrumb
-            routeSegments={[{ name: 'Filter Record', path: '/weekly-filter/WeeklyRecord' }, { name: 'Table' }]}
+            routeSegments={[{ name: 'Weekly Record', path: '/weekly-filter/WeeklyRecord' }, { name: 'Table' }]}
           />
           {/* // -------------FOR BACK BUTTON-------------------- */}
           <Button

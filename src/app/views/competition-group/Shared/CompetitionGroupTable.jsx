@@ -115,7 +115,7 @@ const PaginationTable = () => {
         rowsPerPage={rowsPerPage}
         count={users.length}
         onPageChange={handleChangePage}
-        rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={[5, 10, 25, 50, 100]}
         onRowsPerPageChange={handleChangeRowsPerPage}
         nextIconButtonProps={{ 'aria-label': 'Next Page' }}
         backIconButtonProps={{ 'aria-label': 'Previous Page' }}

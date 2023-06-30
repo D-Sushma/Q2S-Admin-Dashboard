@@ -95,7 +95,7 @@ const columns = [
 const options = {
     filterType: "multiselect",
     rowsPerPage: [5],
-    rowsPerPageOptions: [5, 10, 20, 50, 100],
+    rowsPerPageOptions: [5, 10, 25, 50, 100],
     jumpToPage: true,
     selectableRows: false,
     // ** Other Some Options...
@@ -140,7 +140,7 @@ export default function Tables() {
 
                 <ThemeProvider theme={getMuiTheme()}>
                     <MUIDataTable
-                        title={"MEMBER REGISTRATION"}
+                        title={"TOTAL REGISTRATION"}
                         data={state}
                         columns={columns}
                         options={options}
